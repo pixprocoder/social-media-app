@@ -1,5 +1,4 @@
 const HomePage = () => {
-  klsdj
   return (
     <div>
       <h3>Hello This is Home page</h3>

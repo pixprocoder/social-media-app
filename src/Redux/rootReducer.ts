@@ -1,8 +1,7 @@
-import { combineReducers } from "@reduxjs/toolkit";
 import { baseApi } from "./api/baseApi";
 
-const rootReducer = combineReducers({
+const rootReducer = {
   [baseApi.reducerPath]: [baseApi.reducer],
-});
+};
 
 export default rootReducer;
