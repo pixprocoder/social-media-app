@@ -1,9 +1,11 @@
-const HomePage = () => {
+import WelComeingPage from "@/Components/welcoming/WelComingPage";
+
+const LandingPage = () => {
   return (
     <div>
-      <h3>Hello This is Home page</h3>
+      <WelComeingPage />
     </div>
   );
 };
 
-export default HomePage;
+export default LandingPage;
