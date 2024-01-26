@@ -6,8 +6,8 @@
  *
  */
 
-import { configureStore, Middleware } from "@reduxjs/toolkit";
-import reducer from "./rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
+
 import { baseApi } from "./api/baseApi";
 import rootReducer from "./rootReducer";
 

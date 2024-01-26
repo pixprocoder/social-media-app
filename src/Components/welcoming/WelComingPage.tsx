@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import welcomingpic from "/public/welcoming/joining-us.png";
+import Link from "next/link";
 
 const WelComingPage = () => {
   return (
@@ -22,9 +23,11 @@ const WelComingPage = () => {
         <p className="font-semibold text-xl my-2 lg:my-4">
           Connect with Friends,Chat with free!{" "}
         </p>
-        <button className="font-bold text-xl bg-violet-500 hover:bg-violet-800 transition-colors duration-300 px-6 p-1 text-white rounded">
-          Join Us
-        </button>
+        <Link href="/auth">
+          <button className="font-bold text-xl bg-violet-500 hover:bg-violet-800 transition-colors duration-300 px-6 p-1 text-white rounded">
+            Join Us
+          </button>
+        </Link>
       </div>
     </div>
   );
