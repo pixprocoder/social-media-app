@@ -9,15 +9,7 @@
 "use client";
 import React from "react";
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Checkbox,
-  Alert,
-  Form,
-  Input,
-  Typography,
-  DatePicker,
-} from "antd";
+import { Form, Input, DatePicker } from "antd";
 import { useAppDispatch } from "@/Redux/hooks";
 import { changeAuthState } from "@/Redux/Slices/authSlice";
 import { useRegisterMutation } from "@/Redux/api/authApi";

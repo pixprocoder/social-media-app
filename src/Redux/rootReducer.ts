@@ -1,9 +1,11 @@
-import authSlice from "./Slices/authSlice";
+import authReducer from "./Slices/authSlice";
+import themeReducer from "./Slices/themeSlice";
 import { baseApi } from "./api/baseApi";
 
 const rootReducer = {
   [baseApi.reducerPath]: baseApi.reducer,
-  authSlice: authSlice,
+  authSlice: authReducer,
+  themeSlice: themeReducer,
 };
 
 export default rootReducer;

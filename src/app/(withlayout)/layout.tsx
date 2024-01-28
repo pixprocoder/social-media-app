@@ -7,7 +7,7 @@ const AfterLoginLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <DesktopNavbar />
-      {children}
+      <div>{children}</div>
     </div>
   );
 };

@@ -2,8 +2,9 @@ import React from "react";
 
 const AfterLoginHomePage = () => {
   return (
-    <div>
-      {/* <h2>After Login Home Page</h2> */}
+    <div className="bg-primary-color">
+      {" "}
+      <h2>After Login Home Page</h2>
     </div>
   );
 };
