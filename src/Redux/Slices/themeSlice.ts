@@ -4,15 +4,21 @@ import {
   setThemeStatusLocalStorage,
 } from "@/utils/local-storage";
 import { createSlice } from "@reduxjs/toolkit";
+import { useEffect } from "react";
+import { useAppDispatch } from "../hooks";
 
 export interface IisDarkMode {
   isDarkMode: boolean;
 }
 
-const themeStatus = getFromLocalStorage(themeKey) || "false";
-const initialState: IisDarkMode = {
-  isDarkMode: JSON.parse(themeStatus),
+const initializeThemeStatus = () => {
+  const themeStatus = getFromLocalStorage(themeKey) || "false";
+  return {
+    isDarkMode: JSON.parse(themeStatus),
+  };
 };
+
+const initialState: IisDarkMode = initializeThemeStatus();
 
 export const themeSlice = createSlice({
   name: "theme",

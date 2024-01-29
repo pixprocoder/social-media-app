@@ -1,23 +1,39 @@
 "use client";
-
+// Import Statements
+import { BsMoonStars, BsBrightnessHigh } from "react-icons/bs";
 import { toggleThemeMode } from "@/Redux/Slices/themeSlice";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
-import { BsMoonStars, BsBrightnessHigh } from "react-icons/bs";
+import { useEffect, useState } from "react";
+const shouldRenderOnServer = typeof window === "undefined";
 const DarkmodeToggle = () => {
-  // redux
+  // Local State
+  const [localThemeState, setLocalThemeState] = useState(false);
+  // Redux
   const dispatch = useAppDispatch();
+
   const themeState = useAppSelector((state) => state.themeSlice.isDarkMode);
+
+  useEffect(() => {
+    if (shouldRenderOnServer) {
+      return;
+    }
+    setLocalThemeState(themeState);
+  }, [themeState]);
+
+  // Event Handling
+  const handleToggleClick = () => {
+    dispatch(toggleThemeMode());
+  };
+
   return (
     <span>
-      {themeState ? (
-        <button onClick={() => dispatch(toggleThemeMode())}>
-          <BsBrightnessHigh className="text-2xl text-violet-500 " />{" "}
-        </button>
-      ) : (
-        <button onClick={() => dispatch(toggleThemeMode())}>
-          <BsMoonStars className="text-2xl text-violet-500 " />
-        </button>
-      )}
+      <button onClick={handleToggleClick}>
+        {localThemeState ? (
+          <BsBrightnessHigh className="text-2xl text-violet-500" />
+        ) : (
+          <BsMoonStars className="text-2xl text-violet-500" />
+        )}
+      </button>
     </span>
   );
 };

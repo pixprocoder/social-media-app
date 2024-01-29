@@ -5,10 +5,10 @@ import React from "react";
 
 const AfterLoginLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <>
       <DesktopNavbar />
       <div>{children}</div>
-    </div>
+    </>
   );
 };
 
