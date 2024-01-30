@@ -35,6 +35,10 @@ const FeedPostCard = () => {
           😃
           <span>Activity</span>
         </p>
+
+        <p className="px-2 py-1 rounded-full cursor-pointer font-light bg-[#f4f4f4] flex gap-1 justify-center items-center">
+          <span>More</span>
+        </p>
       </div>
     </Card>
   );
