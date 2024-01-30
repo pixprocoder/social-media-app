@@ -1,26 +1,36 @@
 "use client";
 import { FaAlignRight, FaMagnifyingGlass } from "react-icons/fa6";
-import React, { useState } from "react";
-import { Button, Drawer } from "antd";
+import { Drawer } from "antd";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import { setOpenDrawer } from "@/Redux/Slices/navbarSlice";
 const MobileNavRight = () => {
-  const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
-  };
+  // redux
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.navbarSlice.drawerOpen);
 
-  const onClose = () => {
-    setOpen(false);
-  };
   return (
     <div className="flex items-center gap-3">
-      <div className="  ">
+      <div>
         <span>
           <FaMagnifyingGlass className="text-2xl" />
         </span>
       </div>
-      <div className="   ">
-        <FaAlignRight className="text-4xl text-white bg-violet-500 p-1" />
+      <div>
+        <button onClick={() => dispatch(setOpenDrawer(true))}>
+          <FaAlignRight className="text-3xl  " />
+        </button>
       </div>
+
+      <Drawer
+        width={250}
+        title="Basic Drawer"
+        onClose={() => dispatch(setOpenDrawer(false))}
+        open={isOpen}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
     </div>
   );
 };
