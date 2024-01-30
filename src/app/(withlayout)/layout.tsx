@@ -1,12 +1,11 @@
 "use client";
-
-import DesktopNavbar from "@/Components/navbar/DesktopNavbar";
+import Navbar from "@/Components/navbar/Navbar";
 import React from "react";
 
 const AfterLoginLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <DesktopNavbar />
+      <Navbar />
       <div>{children}</div>
     </>
   );
