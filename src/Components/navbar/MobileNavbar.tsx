@@ -6,7 +6,7 @@ import RightSideNavbar from "./components/RightSideNavbar";
 
 const MobileNavbar = () => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center">
       <div className="w-[40px] h-[40px] bg-violet-500 p-1 rounded">
         <Image
           src={logo}

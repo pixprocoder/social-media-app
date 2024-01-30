@@ -23,8 +23,8 @@ const RightSideNavbar = () => {
           <Avatar size={45} icon={<UserOutlined />} />
         </Space>
       </div>
-      <div>
-        <FaAlignRight className="text-4xl text-violet-700 bg-" />
+      <div className="md:hidden  ">
+        <FaAlignRight className="text-4xl text-white bg-violet-500 p-1" />
       </div>
     </div>
   );
