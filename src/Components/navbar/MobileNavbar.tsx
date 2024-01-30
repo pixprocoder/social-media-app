@@ -2,11 +2,11 @@ import Image from "next/image";
 import React from "react";
 import logo from "/public/logo.jpg";
 import LeftSideNavBar from "./components/LeftSideNavBar";
-import RightSideNavbar from "./components/RightSideNavbar";
+import MobileNavRight from "./components/MobileNavRight";
 
 const MobileNavbar = () => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center px-1">
       <div className="w-[40px] h-[40px] bg-violet-500 p-1 rounded">
         <Image
           src={logo}
@@ -20,7 +20,7 @@ const MobileNavbar = () => {
         <LeftSideNavBar />
       </div>
       <div>
-        <RightSideNavbar />
+        <MobileNavRight />
       </div>
     </div>
   );

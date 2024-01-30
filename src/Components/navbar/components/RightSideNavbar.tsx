@@ -3,7 +3,6 @@ import NavbarSearchBar from "./NavbarSearchBar";
 import DarkmodeToggle from "./DarkmodeToggle";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Space } from "antd";
-import { BsSearch } from "react-icons/bs";
 
 const RightSideNavbar = () => {
   return (
@@ -11,12 +10,10 @@ const RightSideNavbar = () => {
       <div className="hidden  md:block">
         <NavbarSearchBar />
       </div>
-      <div className="md:hidden ">
-        <span>
-          <BsSearch className="text-3xl" />
-        </span>
+
+      <div className="hidden md:block">
+        <DarkmodeToggle />
       </div>
-      <DarkmodeToggle />
       <div className="hidden md:block">
         <Space wrap size={16}>
           <Avatar size={45} icon={<UserOutlined />} />
