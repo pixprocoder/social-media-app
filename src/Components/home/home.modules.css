@@ -8,5 +8,5 @@
   display: grid;
   grid-template-columns: 20% auto 20%;
   width: 100%;
-  gap: 10px;
+  gap: 20px;
 }
