@@ -1,6 +1,16 @@
 "use client";
 import { FaAlignRight, FaMagnifyingGlass } from "react-icons/fa6";
+import React, { useState } from "react";
+import { Button, Drawer } from "antd";
 const MobileNavRight = () => {
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="flex items-center gap-3">
       <div className="  ">
