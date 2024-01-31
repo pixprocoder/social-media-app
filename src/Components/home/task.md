@@ -27,3 +27,6 @@
 - Finish suggested friends ✅
 
 ## FeedDetailsPage
+
+- finish the page layout
+  - add comment threads ✅
