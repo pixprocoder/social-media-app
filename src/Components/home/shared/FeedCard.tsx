@@ -56,17 +56,17 @@ const FeedCard = () => {
         <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
           {" "}
           <BiSolidLike />
-          <span>Like</span>
+          <span className="font_raleway">Like</span>
         </div>
         <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
           {" "}
           <FaComment />
-          <span>Comment</span>
+          <span className="font_raleway">Comment</span>
         </div>
         <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
           {" "}
           <IoSend />
-          <span>Share</span>
+          <span className="font_raleway">Share</span>
         </div>
       </div>
     </section>
