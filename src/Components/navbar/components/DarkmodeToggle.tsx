@@ -28,7 +28,7 @@ const DarkmodeToggle = () => {
   };
 
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+    console.log(value);
   };
 
   const options = [
