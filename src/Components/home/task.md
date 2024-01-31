@@ -14,3 +14,9 @@
 
 - finish weather card
   - setup layout with static data ✅
+  - finish recommended card
+  - finish activity card
+
+## RightSideBar
+
+- Finish Status card

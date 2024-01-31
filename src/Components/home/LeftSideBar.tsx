@@ -20,37 +20,37 @@ const LeftSideBar = () => {
             </div>
             {/* Week */}
             <div className="grid grid-cols-7 bg-gray-100 gap-2 p-2 rounded-md my-2">
-              <div className="flex flex-col ">
+              <div className="flex flex-col  justify-between items-center ">
                 <h1 className=" font-light text-sm">MON</h1>
                 <span className=" font-normal text-sm">☀️</span>
                 <h1 className="font_raleway font-light text-sm">69</h1>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col justify-between items-center ">
                 <h1 className=" font-light text-sm">TUE</h1>
                 <span className=" font-normal text-sm">🌥️</span>
                 <h1 className="font_raleway font-light text-sm">69</h1>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col justify-between items-center ">
                 <h1 className=" font-light text-sm">WED</h1>
                 <span className=" font-normal text-sm">🌦️</span>
                 <h1 className="font_raleway font-light text-sm">69</h1>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col justify-between items-center ">
                 <h1 className=" font-light text-sm">THU</h1>
                 <span className=" font-normal text-sm">🌦️</span>
                 <h1 className="font_raleway font-light text-sm">63</h1>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col justify-between items-center ">
                 <h1 className=" font-light text-sm">FRI</h1>
                 <span className=" font-normal text-sm">🌧️</span>
                 <h1 className="font_raleway font-light text-sm">69</h1>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col justify-between items-center ">
                 <h1 className=" font-light text-sm">SAT</h1>
                 <span className=" font-normal text-sm">🌥️</span>
                 <h1 className="font_raleway font-light text-sm">50</h1>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col justify-between items-center ">
                 <h1 className=" font-light text-sm">SUN</h1>
                 <span className=" font-normal text-sm">🌧️</span>
                 <h1 className="font_raleway font-light text-sm">69</h1>
@@ -72,7 +72,6 @@ const LeftSideBar = () => {
           <div>
             <div className="flex justify-between ">
               <h1 className="font_montserrat">Recommended Pages</h1>
-
               <Button
                 shape="circle"
                 className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
@@ -88,39 +87,44 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm">Pizza</span>
-                  <small className="font-light">Pizza & Fast Food</small>
+                  <span className="font_montserrat  text-sm">Pizza</span>
+                  <small className="user_sub_heading font-light">
+                    Pizza & Fast Food
+                  </small>
                 </div>
               </div>
-              <span>
+              <span className="cursor-pointer">
                 <FaRegBookmark />
               </span>
             </div>
             <hr className="" />
-            {/* pages 2 */}
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm">Pizza</span>
-                  <small className="font-light">Pizza & Fast Food</small>
+                  <span className="font_montserrat  text-sm">Pizza</span>
+                  <small className="user_sub_heading font-light">
+                    Pizza & Fast Food
+                  </small>
                 </div>
               </div>
-              <span>
+              <span className="cursor-pointer">
                 <FaRegBookmark />
               </span>
             </div>
             <hr className="" />
-            {/* pages 3 */}
+            {/* 3 */}
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm">Pizza</span>
-                  <small className="font-light">Pizza & Fast Food</small>
+                  <span className="font_montserrat  text-sm">Pizza</span>
+                  <small className="user_sub_heading font-light">
+                    Pizza & Fast Food
+                  </small>
                 </div>
               </div>
-              <span>
+              <span className="cursor-pointer">
                 <FaRegBookmark />
               </span>
             </div>
@@ -128,51 +132,62 @@ const LeftSideBar = () => {
         </div>
 
         {/* Latest activity */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-white p-4 rounded-md ">
           <div>
             <div className="flex justify-between ">
-              <h1>Latest Activity</h1>
-              <BsThreeDotsVertical />
+              <h1 className="font_montserrat">Latest Activity</h1>
+              <Button
+                shape="circle"
+                className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+              >
+                <span>
+                  <BsThreeDotsVertical className="font-bold" />
+                </span>
+              </Button>
             </div>
             <hr className="mt-2" />
-            {/* pages 1 */}
+            {/* section 1 */}
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm">Css Ninja</span>
-                  <small className="font-light">3 hours ago</small>
+                  <span className="text-sm font_montserrat">Css Ninja</span>
+                  <small className="font-light user_sub_heading">
+                    3 hours ago
+                  </small>
                 </div>
               </div>
-              <span>
+              <span className="cursor-pointer">
                 <MdOutlineRemoveRedEye />
               </span>
             </div>
             <hr className="" />
-            {/* pages 2 */}
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm">Js Ninja</span>
-                  <small className="font-light">1 second ago</small>
+                  <span className="text-sm font_montserrat">Css Ninja</span>
+                  <small className="font-light  user_sub_heading">
+                    3 hours ago
+                  </small>
                 </div>
               </div>
-              <span>
+              <span className="cursor-pointer">
                 <MdOutlineRemoveRedEye />
               </span>
             </div>
             <hr className="" />
-            {/* pages 3 */}
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm">React Icons</span>
-                  <small className="font-light">5 hours ago</small>
+                  <span className="text-sm font_montserrat">Css Ninja</span>
+                  <small className="font-light user_sub_heading">
+                    3 hours ago
+                  </small>
                 </div>
               </div>
-              <span>
+              <span className="cursor-pointer">
                 <MdOutlineRemoveRedEye />
               </span>
             </div>
