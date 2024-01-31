@@ -6,6 +6,7 @@ import { BiSolidLike } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
+import Link from "next/link";
 
 const FeedCard = () => {
   return (
@@ -45,12 +46,14 @@ const FeedCard = () => {
           cupiditate debitis beatae non
         </p>
       </div>
-      <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
-        <img
-          alt="example"
-          src="https://scontent.fotp3-1.fna.fbcdn.net/v/t39.30808-6/422390498_877546237707359_1733397625107647164_n.jpg?stp=dst-jpg_p526x296&_nc_cat=1&ccb=1-7&_nc_sid=3635dc&_nc_ohc=g3d3qhUL6UEAX-4_dQ0&_nc_ht=scontent.fotp3-1.fna&oh=00_AfCYTrYGyk89oy8m1rgSeEmRjLn4UhCAmZ0QlNQT2CmhOg&oe=65BFB15D"
-        />
-      </div>
+      <Link href={`/photo/id`}>
+        <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
+          <img
+            alt="example"
+            src="https://scontent.fotp3-1.fna.fbcdn.net/v/t39.30808-6/422390498_877546237707359_1733397625107647164_n.jpg?stp=dst-jpg_p526x296&_nc_cat=1&ccb=1-7&_nc_sid=3635dc&_nc_ohc=g3d3qhUL6UEAX-4_dQ0&_nc_ht=scontent.fotp3-1.fna&oh=00_AfCYTrYGyk89oy8m1rgSeEmRjLn4UhCAmZ0QlNQT2CmhOg&oe=65BFB15D"
+          />
+        </div>
+      </Link>
       {/* Footer */}
       <div className="flex justify-between gap-2 py-2">
         <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
