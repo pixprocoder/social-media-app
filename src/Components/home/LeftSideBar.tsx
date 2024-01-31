@@ -7,7 +7,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 const LeftSideBar = () => {
   return (
     <section>
-      <div className="flex flex-col justify-between min-h-[90vh]">
+      <div className="flex flex-col justify-between min-h-[90vh] gap-4">
         {/* Weather card */}
         <div className="bg-blue-500 bg-opacity-20 p-4 rounded-md">
           <div className="flex flex-col justify-between items-center ">
@@ -21,7 +21,7 @@ const LeftSideBar = () => {
             {/* Week */}
             <div className="grid grid-cols-7 bg-gray-100 gap-2 p-2 rounded-md my-2">
               <div className="flex flex-col ">
-                <h1 className=" font-light text-sm">Mon</h1>
+                <h1 className=" font-light text-sm">MON</h1>
                 <span className=" font-normal text-sm">☀️</span>
                 <h1 className="font_raleway font-light text-sm">69</h1>
               </div>
@@ -67,12 +67,20 @@ const LeftSideBar = () => {
           </div>
         </div>
 
-        {/* Recommended */}
+        {/* Recommended Card */}
         <div className="bg-white p-4 rounded-md">
           <div>
             <div className="flex justify-between ">
-              <h1>Recommended Pages</h1>
-              <BsThreeDotsVertical />
+              <h1 className="font_montserrat">Recommended Pages</h1>
+
+              <Button
+                shape="circle"
+                className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+              >
+                <span>
+                  <BsThreeDotsVertical className="font-bold" />
+                </span>
+              </Button>
             </div>
             <hr className="mt-2" />
             {/* pages 1 */}
