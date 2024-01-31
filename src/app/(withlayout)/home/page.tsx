@@ -1,7 +1,9 @@
-import LeftSideBar from "@/Components/home/LeftSideBar";
-import MainFeed from "@/Components/home/MainFeed";
-import RightSideBar from "@/Components/home/RightSideBar";
+import React from "react";
+
 import "../../../Components/home/home.modules.css";
+import LeftSideBar from "../../../Components/home/LeftSideBar";
+import MainFeed from "../../../Components/home/MainFeed";
+import RightSideBar from "../../../Components/home/RightSideBar";
 
 const AfterLoginHomePage = () => {
   return (

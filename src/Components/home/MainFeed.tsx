@@ -1,3 +1,4 @@
+import React from "react";
 import FeedCard from "./FeedCard";
 import FeedPostCard from "./FeedPostCard";
 
