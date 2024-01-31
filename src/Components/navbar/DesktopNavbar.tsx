@@ -8,6 +8,7 @@
 
 "use client";
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { AiOutlineBell, AiOutlineHome, AiOutlineUserAdd } from "react-icons/ai";
 import { UserOutlined } from "@ant-design/icons";
 import { BsChatRight } from "react-icons/bs";
@@ -53,6 +54,23 @@ const DesktopNavbar = () => {
         <Space wrap size={16}>
           <Avatar size={45} icon={<UserOutlined />} />
         </Space>
+=======
+
+import LeftSideNavBar from "./components/LeftSideNavBar";
+import RightSideNavbar from "./components/RightSideNavbar";
+
+const DesktopNavbar = () => {
+  return (
+    <div
+      className="flex justify-between gap-5 shadow-lg  px-10 
+    py-3"
+    >
+      <nav>
+        <LeftSideNavBar />
+      </nav>
+      <nav>
+        <RightSideNavbar />
+>>>>>>> b5c033d50fb0df03bdd3b2aa6b742cc1b39df58d
       </nav>
     </div>
   );
