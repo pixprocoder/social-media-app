@@ -70,7 +70,7 @@ const LeftSideBar = () => {
         {/* Recommended Card */}
         <div className="bg-white p-4 rounded-md">
           <div>
-            <div className="flex justify-between ">
+            <div className="flex justify-between items-center">
               <h1 className="font_montserrat">Recommended Pages</h1>
               <Button
                 shape="circle"
@@ -87,8 +87,10 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="font_montserrat  text-sm">Pizza</span>
-                  <small className="user_sub_heading font-light">
+                  <span className="font_montserrat color_dark_1  text-sm">
+                    Pizza
+                  </span>
+                  <small className="user_sub_heading color_dark_2 font-light">
                     Pizza & Fast Food
                   </small>
                 </div>
@@ -102,8 +104,10 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="font_montserrat  text-sm">Pizza</span>
-                  <small className="user_sub_heading font-light">
+                  <span className="font_montserrat color_dark_1  text-sm">
+                    Pizza
+                  </span>
+                  <small className="user_sub_heading color_dark_2 font-light">
                     Pizza & Fast Food
                   </small>
                 </div>
@@ -118,8 +122,10 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="font_montserrat  text-sm">Pizza</span>
-                  <small className="user_sub_heading font-light">
+                  <span className="font_montserrat color_dark_1  text-sm">
+                    Pizza
+                  </span>
+                  <small className="user_sub_heading color_dark_2 font-light">
                     Pizza & Fast Food
                   </small>
                 </div>
@@ -134,7 +140,7 @@ const LeftSideBar = () => {
         {/* Latest activity */}
         <div className="bg-white p-4 rounded-md ">
           <div>
-            <div className="flex justify-between ">
+            <div className="flex justify-between items-center ">
               <h1 className="font_montserrat">Latest Activity</h1>
               <Button
                 shape="circle"
@@ -151,8 +157,10 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm font_montserrat">Css Ninja</span>
-                  <small className="font-light user_sub_heading">
+                  <span className="text-sm font_montserrat color_dark_1">
+                    Css Ninja
+                  </span>
+                  <small className="font-light color_dark_2 user_sub_heading">
                     3 hours ago
                   </small>
                 </div>
@@ -166,8 +174,10 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm font_montserrat">Css Ninja</span>
-                  <small className="font-light  user_sub_heading">
+                  <span className="text-sm font_montserrat color_dark_1">
+                    Css Ninja
+                  </span>
+                  <small className="font-light color_dark_2  user_sub_heading">
                     3 hours ago
                   </small>
                 </div>
@@ -181,8 +191,10 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm font_montserrat">Css Ninja</span>
-                  <small className="font-light user_sub_heading">
+                  <span className="text-sm font_montserrat color_dark_1">
+                    Css Ninja
+                  </span>
+                  <small className="font-light color_dark_2 user_sub_heading">
                     3 hours ago
                   </small>
                 </div>

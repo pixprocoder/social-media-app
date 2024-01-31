@@ -21,6 +21,12 @@
 .color_primary {
   color: #6d27da;
 }
+.color_dark_1 {
+  color: #393a4f;
+}
+.color_dark_2 {
+  color: #757a91;
+}
 
 .home_container {
   max-width: 1400px;
