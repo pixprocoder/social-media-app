@@ -3,21 +3,25 @@ import { setOpenDrawer } from "@/Redux/Slices/navbarSlice";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { Drawer } from "antd";
 
-const NavbarProfileDrawer = () => {
+const NavbarProfileDrawer = ({ width }: { width: string }) => {
   // redux
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.navbarSlice.drawerOpen);
-  console.log(isOpen);
+
   return (
-    <Drawer
-      title="profile Drawer"
-      onClose={() => dispatch(setOpenDrawer(false))}
-      open={isOpen}
-    >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-    </Drawer>
+    <div>
+      <Drawer
+        width={width}
+        
+        title="Profile"
+        onClose={() => dispatch(setOpenDrawer(false))}
+        open={isOpen}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
+    </div>
   );
 };
 

@@ -3,18 +3,18 @@ import {
   getFromLocalStorage,
   setThemeStatusLocalStorage,
 } from "@/utils/local-storage";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useAppDispatch } from "../hooks";
 
 export interface IisDarkMode {
-  isDarkMode: boolean;
+  theme: string;
 }
 
 const initializeThemeStatus = () => {
-  const themeStatus = getFromLocalStorage(themeKey) || "false";
+  const themeStatus = getFromLocalStorage(themeKey) || "system";
   return {
-    isDarkMode: JSON.parse(themeStatus),
+    isDarkMode: themeStatus,
   };
 };
 
@@ -24,9 +24,9 @@ export const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    toggleThemeMode: (state) => {
-      state.isDarkMode = !state.isDarkMode;
-      setThemeStatusLocalStorage(themeKey, state.isDarkMode);
+    toggleThemeMode: (state, action: PayloadAction<string>) => {
+      state.theme = action.payload;
+      // setThemeStatusLocalStorage(themeKey, action.payload);
     },
   },
 });
