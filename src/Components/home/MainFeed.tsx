@@ -8,7 +8,7 @@ const MainFeed = () => {
         <div className="bg-white  rounded-md">
           <FeedPostCard />
         </div>
-        <div className="bg-white p-6 mt-6 rounded-md">
+        <div className="bg-white px-6 pt-2 mt-6 rounded-md">
           <FeedCard />
         </div>
       </div>
