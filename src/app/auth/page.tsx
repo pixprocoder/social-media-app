@@ -18,11 +18,7 @@ const Authentication = () => {
 
   return (
     <div className="flex justify-center items-center h-[100vh]">
-<<<<<<< HEAD
-      {/* <div>{authState ? <Login /> : <Register />}</div> */}
-=======
       <div>{authState ? <Login /> : <Register />}</div>
->>>>>>> b5c033d50fb0df03bdd3b2aa6b742cc1b39df58d
     </div>
   );
 };

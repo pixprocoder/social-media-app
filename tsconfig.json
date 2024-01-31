@@ -17,8 +17,9 @@
         "name": "next",
       },
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/": ["./src/"],
+      "@/*": ["src/*"],
     },
   },
   "include": [
@@ -27,6 +28,7 @@
     "/.tsx",
     ".next/types//*.ts",
     "src/Components/navbar/components/Navbar-Item&Label/NavbarLebel",
+    ".next/types/**/*.ts",
   ],
   "exclude": ["node_modules"],
 }
