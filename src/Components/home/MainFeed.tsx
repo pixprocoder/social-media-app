@@ -5,7 +5,7 @@ import FeedPostCard from "./shared/FeedPostCard";
 const MainFeed = () => {
   return (
     <section className="">
-      <div className="  min-h-[90vh]  ">
+      <div className="  min-h-[90vh] overflow-auto  ">
         <div className="bg-white  rounded-md">
           <FeedPostCard />
         </div>

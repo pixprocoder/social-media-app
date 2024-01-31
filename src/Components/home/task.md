@@ -19,6 +19,7 @@
   - setup layout with static data ✅
   - finish recommended card ✅
   - finish activity card ✅
+  - complete position
 
 ## RightSideBar
 

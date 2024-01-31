@@ -7,7 +7,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 const LeftSideBar = () => {
   return (
     <section>
-      <div className="flex flex-col justify-between min-h-[90vh] gap-4">
+      <div className="flex flex-col justify-between min-h-[90vh] gap-4 sticky left-0 top-0">
         {/* Weather card */}
         <div className="bg-blue-500 bg-opacity-20 p-4 rounded-md">
           <div className="flex flex-col justify-between items-center ">
