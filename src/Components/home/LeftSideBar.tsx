@@ -3,6 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import React from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 const LeftSideBar = () => {
   return (
     <section>
@@ -16,7 +17,7 @@ const LeftSideBar = () => {
           <div>
             <div className="flex justify-between ">
               <h1>Recommended Pages</h1>
-              <span>...</span>
+              <BsThreeDotsVertical />
             </div>
             <hr className="mt-2" />
             {/* pages 1 */}
@@ -68,7 +69,7 @@ const LeftSideBar = () => {
           <div>
             <div className="flex justify-between ">
               <h1>Latest Activity</h1>
-              <span>...</span>
+              <BsThreeDotsVertical />
             </div>
             <hr className="mt-2" />
             {/* pages 1 */}
