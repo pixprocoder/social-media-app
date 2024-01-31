@@ -9,3 +9,8 @@
   - Fix padding ✅
   - Change button inner text ✅
   - google font add ✅
+
+## LeftSideBar
+
+- finish weather card
+  - setup layout with static data ✅
