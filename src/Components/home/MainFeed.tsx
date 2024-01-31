@@ -1,6 +1,6 @@
 import React from "react";
-import FeedCard from "./FeedCard";
-import FeedPostCard from "./FeedPostCard";
+import FeedCard from "./shared/FeedCard";
+import FeedPostCard from "./shared/FeedPostCard";
 
 const MainFeed = () => {
   return (
