@@ -12,7 +12,7 @@ const LeftSideNavBar = () => {
   const [navbarState, setNavbarState] = useState(1);
   return (
     <div className="flex items-center gap-4">
-      <div className="w-[60px]  hidden md:block bg-violet-500 p-1 rounded">
+      <div className="w-[60px]  hidden md:block  p-1 rounded">
         <Image
           src={logo}
           alt="profile picture "

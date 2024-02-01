@@ -1,2 +1,2 @@
 export const authKey = "accessToken";
-export const themeKey = "themeStatus";
+export const themeKey = "theme";

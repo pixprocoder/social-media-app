@@ -8,7 +8,6 @@
 
 "use client";
 import React, { useState } from "react";
-
 import LeftSideNavBar from "./components/LeftSideNavBar";
 import RightSideNavbar from "./components/RightSideNavbar";
 
@@ -16,7 +15,7 @@ const DesktopNavbar = () => {
   return (
     <div
       className="flex justify-between gap-5 shadow-lg  px-10 
-    py-3"
+    py-3 dark:bg-dark "
     >
       <nav>
         <LeftSideNavBar />
