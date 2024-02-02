@@ -8,7 +8,7 @@ import { FaGift, FaPlus } from "react-icons/fa6";
 const RightSideBar = () => {
   return (
     <section>
-      <div className="flex flex-col justify-between min-h-[90vh] sticky left-0 top-0 ">
+      <div className="flex flex-col gap-4 justify-between min-h-[90vh] sticky left-0 top-0 ">
         <div className="bg-white p-4 rounded-md">
           <div>
             <div className="flex justify-between  items-center">
