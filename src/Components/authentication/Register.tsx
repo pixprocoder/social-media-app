@@ -13,7 +13,7 @@ import { Form, Input, DatePicker } from "antd";
 import { useAppDispatch } from "@/Redux/hooks";
 import { changeAuthState } from "@/Redux/Slices/authSlice";
 import { useRegisterMutation } from "@/Redux/api/authApi";
-import { IUser } from "@/types/auth";
+import { ILoginUserResponse, IUser } from "@/types/auth";
 import Notification from "../shared/Notification";
 import { useRouter } from "next/navigation";
 import { setToLocalStorage } from "@/utils/local-storage";
@@ -34,20 +34,18 @@ const Register: React.FC = () => {
       // dateOfBirtch:values.
       password: values.password,
     };
-    // console.log(user);
     const res = await setRegister(user);
-    console.log(res);
 
-    if (res?.data?.accessToken) {
-      setToLocalStorage(authKey, res?.data?.accessToken);
+    if ("data" in res && res.data?.accessToken) {
+      setToLocalStorage(authKey, res.data.accessToken);
       router.push("/home");
       Notification({
-        description: "User Successfully Registred",
+        description: "User Successfully Registered",
         placement: "bottomRight",
       });
     } else {
       Notification({
-        description: "SomeThing is wrong",
+        description: "Something is wrong",
         placement: "bottomLeft",
       });
     }

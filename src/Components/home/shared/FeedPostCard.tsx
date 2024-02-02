@@ -1,3 +1,4 @@
+"use client";
 // Import necessary dependencies
 import React, { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";

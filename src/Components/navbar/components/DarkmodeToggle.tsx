@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsMoonStars, BsBrightnessHigh } from "react-icons/bs";
 import { FaDesktop, FaMoon } from "react-icons/fa6";
-import { toggleThemeMode } from "@/Redux/Slices/themeSlice";
+// import { toggleThemeMode } from "@/Redux/Slices/themeSlice";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
-import { useEffect, useState } from "react";
 import { Select, Space } from "antd";
 
 const shouldRenderOnServer = typeof window === "undefined";
@@ -13,14 +12,14 @@ const DarkmodeToggle = () => {
   const [localThemeState, setLocalThemeState] = useState(false);
   // Redux
   const dispatch = useAppDispatch();
-  const themeState = useAppSelector((state) => state.themeSlice.theme);
+  // const themeState = useAppSelector((state) => state.themeSlice.theme);
 
   useEffect(() => {
     if (shouldRenderOnServer) {
       return;
     }
     // setLocalThemeState(themeState);
-  }, [themeState]);
+  }, []);
 
   // Event Handling
   const handleToggleClick = () => {
@@ -56,15 +55,7 @@ const DarkmodeToggle = () => {
     ),
   }));
 
-  const defaultValue = {
-    value: "system",
-    label: (
-      <span className="flex justify-center items-center gap-1">
-        <FaDesktop />
-        {"system"}
-      </span>
-    ),
-  };
+  const defaultValue = "system";
 
   return (
     <Space>

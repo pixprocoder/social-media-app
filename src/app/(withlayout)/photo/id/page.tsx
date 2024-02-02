@@ -4,17 +4,16 @@ import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import { UserOutlined } from "@ant-design/icons";
 import { BiSolidLike } from "react-icons/bi";
 import { FaComment } from "react-icons/fa6";
-import Comment from "../../../../Components/home/shared/comment";
+import Comment from "@/Components/home/shared/Comment";
+import Image from "next/image";
+import img from "/public/unnamed.webp";
 
 const PostDetailPage = () => {
   return (
     <section>
       <div className="flex min-h-[90vh]">
         <div className="w-9/12 bg-gray-200 flex justify-center items-center">
-          <img
-            alt="example"
-            src="https://scontent.fotp3-1.fna.fbcdn.net/v/t39.30808-6/422390498_877546237707359_1733397625107647164_n.jpg?stp=dst-jpg_p526x296&_nc_cat=1&ccb=1-7&_nc_sid=3635dc&_nc_ohc=g3d3qhUL6UEAX-4_dQ0&_nc_ht=scontent.fotp3-1.fna&oh=00_AfCYTrYGyk89oy8m1rgSeEmRjLn4UhCAmZ0QlNQT2CmhOg&oe=65BFB15D"
-          />
+          <Image alt="example" src={img} width={400} height={400} />
         </div>
         <div className="w-3/12 ">
           {/* Parent */}
@@ -64,7 +63,7 @@ const PostDetailPage = () => {
           </div>
           {/* Comments */}
           <div>
-            <Comment />
+            {/* <Comment /> */}
           </div>
         </div>
       </div>

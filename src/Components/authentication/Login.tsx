@@ -27,16 +27,16 @@ const Login: React.FC = () => {
   const onFinish = async (values: any) => {
     const res = await setLogin(values);
 
-    if (res?.data?.accessToken) {
-      setToLocalStorage(authKey, res?.data?.accessToken);
+    if ("data" in res && res.data?.accessToken) {
+      setToLocalStorage(authKey, res.data.accessToken);
+      router.push("/home");
       Notification({
-        description: "User Successfully Logged in",
+        description: "User Successfully Logedin",
         placement: "bottomRight",
       });
-      router.push("/home");
     } else {
       Notification({
-        description: "Something is went wrong.",
+        description: "Something is wrong",
         placement: "bottomLeft",
       });
     }

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+"use client";
+import React from "react";
 import { BsXCircle, BsEmojiSmile, BsCamera } from "react-icons/bs";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import EmojiPicker from "emoji-picker-react";
+// import EmojiPicker from "emoji-picker-react";
 import {
   useGetAllCommentQuery,
   useSubmitCommentMutation,
@@ -10,28 +11,17 @@ import {
 import { IComment } from "@/types/newsfeed";
 import Comment from "./Comment";
 
-
-
 const PostCommentBox = ({ setShowComments, postId }: any) => {
-  // const [comment, setComment] = useState("");
-  // const [showEmojiPicker, setShowEmojiPicker] = useState(true);
-
-  // const handleEmojiClick = (emoji) => {
-  //   console.log(emoji);
-  //   setComment((prevComment) => prevComment + emoji);
-  // };
-
-  // const handleToggleEmojiPicker = () => {
-  //   // setShowEmojiPicker((prev) => !prev);
-
-  // };
-
   const [submitComment] = useSubmitCommentMutation();
   const { data: comments } = useGetAllCommentQuery(postId);
   const handlePostComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target;
-    const comment = form.commentbox.value as string;
+    const form = e.target as HTMLFormElement;
+
+    // Explicitly cast form to FormData
+    const formData = new FormData(form);
+
+    const comment = formData.get("commentbox") as string;
     const commentData = {
       post: postId,
       comment: comment,
