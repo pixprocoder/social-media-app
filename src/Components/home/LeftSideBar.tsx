@@ -4,67 +4,15 @@ import React from "react";
 import { FaBookmark, FaLocationDot, FaRegBookmark } from "react-icons/fa6";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Weather from "../newsfeed/Wealther/Weather";
+
 const LeftSideBar = () => {
   return (
     <section>
       <div className="flex flex-col justify-between min-h-[90vh] gap-4 sticky left-0 top-0">
         {/* Weather card */}
-        <div className="bg-blue-500 bg-opacity-20 p-4 rounded-md">
-          <div className="flex flex-col justify-between items-center ">
-            <h1 className="font_montserrat text-3xl">71°</h1>
-            <span className="font_montserrat text-3xl">🌥️</span>
-            <h1 className="font_montserrat text-2xl">Sunny</h1>
-            <div className="flex gap-4 my-2">
-              <span className="font_raleway text-sm">Real Feel: 78° </span>
-              <span className="font_raleway text-sm">Rain Chance: 5%</span>
-            </div>
-            {/* Week */}
-            <div className="grid grid-cols-7 bg-gray-100 gap-2 p-2 rounded-md my-2">
-              <div className="flex flex-col  justify-between items-center ">
-                <h1 className=" font-light text-sm">MON</h1>
-                <span className=" font-normal text-sm">☀️</span>
-                <h1 className="font_raleway font-light text-sm">69</h1>
-              </div>
-              <div className="flex flex-col justify-between items-center ">
-                <h1 className=" font-light text-sm">TUE</h1>
-                <span className=" font-normal text-sm">🌥️</span>
-                <h1 className="font_raleway font-light text-sm">69</h1>
-              </div>
-              <div className="flex flex-col justify-between items-center ">
-                <h1 className=" font-light text-sm">WED</h1>
-                <span className=" font-normal text-sm">🌦️</span>
-                <h1 className="font_raleway font-light text-sm">69</h1>
-              </div>
-              <div className="flex flex-col justify-between items-center ">
-                <h1 className=" font-light text-sm">THU</h1>
-                <span className=" font-normal text-sm">🌦️</span>
-                <h1 className="font_raleway font-light text-sm">63</h1>
-              </div>
-              <div className="flex flex-col justify-between items-center ">
-                <h1 className=" font-light text-sm">FRI</h1>
-                <span className=" font-normal text-sm">🌧️</span>
-                <h1 className="font_raleway font-light text-sm">69</h1>
-              </div>
-              <div className="flex flex-col justify-between items-center ">
-                <h1 className=" font-light text-sm">SAT</h1>
-                <span className=" font-normal text-sm">🌥️</span>
-                <h1 className="font_raleway font-light text-sm">50</h1>
-              </div>
-              <div className="flex flex-col justify-between items-center ">
-                <h1 className=" font-light text-sm">SUN</h1>
-                <span className=" font-normal text-sm">🌧️</span>
-                <h1 className="font_raleway font-light text-sm">69</h1>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <h1>Sunday, 18th 2018</h1>
-              <h1 className="flex gap-2 justify-center items-center">
-                {" "}
-                <FaLocationDot className="text-sm" />
-                <span> Los Angeles, CA</span>
-              </h1>
-            </div>
-          </div>
+        <div>
+          <Weather />
         </div>
 
         {/* Recommended Card */}

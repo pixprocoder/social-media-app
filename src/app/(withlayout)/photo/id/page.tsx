@@ -4,6 +4,7 @@ import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import { UserOutlined } from "@ant-design/icons";
 import { BiSolidLike } from "react-icons/bi";
 import { FaComment } from "react-icons/fa6";
+import Comment from "../../../../Components/home/shared/comment";
 
 const PostDetailPage = () => {
   return (
@@ -63,29 +64,7 @@ const PostDetailPage = () => {
           </div>
           {/* Comments */}
           <div>
-            <div className="p-2 flex gap-2">
-              <Avatar
-                className="border "
-                size="large"
-                src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-                icon={<UserOutlined />}
-              />
-              <div className="bg-gray-200 p-2 rounded-md mt-2">
-                <h1 className="font-bold color_dark_1">John Smith</h1>
-                <p className="text-sm   color_dark_2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  ornare magna eros.
-                </p>
-                <div className="flex justify-between items-center">
-                  <p className="text-[12px] my-1 cursor-pointer hover:underline color_dark_2">
-                    Like
-                  </p>
-                  <p className="text-[12px] my-1 cursor-pointer hover:underline color_dark_2">
-                    Reply
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Comment />
           </div>
         </div>
       </div>

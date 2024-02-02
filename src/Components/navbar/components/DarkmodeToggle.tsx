@@ -13,18 +13,18 @@ const DarkmodeToggle = () => {
   const [localThemeState, setLocalThemeState] = useState(false);
   // Redux
   const dispatch = useAppDispatch();
-  const themeState = useAppSelector((state) => state.themeSlice.isDarkMode);
+  const themeState = useAppSelector((state) => state.themeSlice.theme);
 
   useEffect(() => {
     if (shouldRenderOnServer) {
       return;
     }
-    setLocalThemeState(themeState);
+    // setLocalThemeState(themeState);
   }, [themeState]);
 
   // Event Handling
   const handleToggleClick = () => {
-    dispatch(toggleThemeMode());
+    // dispatch(toggleThemeMode());
   };
 
   const handleChange = (value: string) => {

@@ -4,8 +4,8 @@ import {
   setThemeStatusLocalStorage,
 } from "@/utils/local-storage";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { useEffect } from "react";
-import { useAppDispatch } from "../hooks";
+// import { useEffect } from "react";
+// import { useAppDispatch } from "../hooks";
 
 export interface IisDarkMode {
   theme: string;
