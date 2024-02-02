@@ -13,6 +13,7 @@ import RightSideNavbar from "./components/RightSideNavbar";
 import Image from "next/image";
 import logo from "/public/logo.jpg";
 import NavbarSearchBar from "./components/NavbarSearchBar";
+import Link from "next/link";
 
 const DesktopNavbar = () => {
   return (
@@ -28,6 +29,7 @@ const DesktopNavbar = () => {
           height={50}
           className="rounded-full"
         />
+
         <div className="hidden  md:block">
           <NavbarSearchBar />
         </div>

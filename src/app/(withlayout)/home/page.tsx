@@ -7,13 +7,15 @@ import RightSideBar from "../../../Components/home/RightSideBar";
 
 const AfterLoginHomePage = () => {
   return (
-    <section className="home_container ">
+    <div>
+      {/* <section className="home_container ">
       <div className="feed_container ">
         <LeftSideBar />
         <MainFeed />
         <RightSideBar />
       </div>
-    </section>
+    </section> */}
+    </div>
   );
 };
 

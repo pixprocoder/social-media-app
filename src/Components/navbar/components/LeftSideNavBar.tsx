@@ -13,16 +13,19 @@ import { notificationItems } from "./Navbar-Item&Label/NavbarItems/NotificationI
 import { RiHome5Fill } from "react-icons/ri";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { IoMdNotifications } from "react-icons/io";
+import Link from "next/link";
 
 const LeftSideNavBar = () => {
   const [navbarState, setNavbarState] = useState(1);
   return (
-    <div className="flex items-center gap-4 justify-between ml-20">
-      <div className="flex  items-center gap-40 justify-between ">
-        <RiHome5Fill
-          onClick={() => setNavbarState(1)}
-          className={`md:text-4xl text-3xl cursor-pointer font-bold p-1  transition-colors duration-300  rounded ${navbarState == 1 ? "text-white  bg-violet-700 " : "text-violet-700"}`}
-        />
+    <div className="flex items-center gap-4 justify-between md:ml-20">
+      <div className="flex  items-center gap-4 md:gap-40 justify-between ">
+        <Link href="/home">
+          <RiHome5Fill
+            onClick={() => setNavbarState(1)}
+            className={`md:text-4xl text-3xl cursor-pointer font-bold p-1  transition-colors duration-300  rounded ${navbarState == 1 ? "text-white  bg-violet-700 " : "text-violet-700"}`}
+          />
+        </Link>
 
         <AiFillMessage
           onClick={() => setNavbarState(2)}
