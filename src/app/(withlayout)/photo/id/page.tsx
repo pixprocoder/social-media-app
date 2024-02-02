@@ -4,11 +4,12 @@ import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import { UserOutlined } from "@ant-design/icons";
 import { BiSolidLike } from "react-icons/bi";
 import { FaComment } from "react-icons/fa6";
+import CommentInput from "../../../../Components/shared/CommentInput";
 
 const PostDetailPage = () => {
   return (
     <section>
-      <div className="flex min-h-[90vh]">
+      <div className="flex  min-h-[90vh] ">
         <div className="w-9/12 bg-gray-200 flex justify-center items-center">
           <img
             alt="example"
@@ -46,7 +47,7 @@ const PostDetailPage = () => {
               <h1 className="text-sm color_dark-2">10 Likes</h1>
               <h1 className="text-sm color_dark-2">10 Comments</h1>
             </div>
-            <hr className="" />
+            <hr className="border border-gray-300" />
             {/* line comment */}
             <div className="flex ">
               <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
@@ -86,6 +87,11 @@ const PostDetailPage = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Comment Input */}
+          <div className="p-2">
+            <CommentInput />
           </div>
         </div>
       </div>
