@@ -4,6 +4,9 @@ import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import { UserOutlined } from "@ant-design/icons";
 import { BiSolidLike } from "react-icons/bi";
 import { FaComment } from "react-icons/fa6";
+import Comment from "@/Components/home/shared/Comment";
+import Image from "next/image";
+import img from "/public/unnamed.webp";
 import CommentInput from "../../../../Components/shared/CommentInput";
 
 const PostDetailPage = () => {
@@ -11,10 +14,7 @@ const PostDetailPage = () => {
     <section>
       <div className="flex  min-h-[90vh] ">
         <div className="w-9/12 bg-gray-200 flex justify-center items-center">
-          <img
-            alt="example"
-            src="https://scontent.fotp3-1.fna.fbcdn.net/v/t39.30808-6/422390498_877546237707359_1733397625107647164_n.jpg?stp=dst-jpg_p526x296&_nc_cat=1&ccb=1-7&_nc_sid=3635dc&_nc_ohc=g3d3qhUL6UEAX-4_dQ0&_nc_ht=scontent.fotp3-1.fna&oh=00_AfCYTrYGyk89oy8m1rgSeEmRjLn4UhCAmZ0QlNQT2CmhOg&oe=65BFB15D"
-          />
+          <Image alt="example" src={img} width={400} height={400} />
         </div>
         <div className="w-3/12 ">
           {/* Parent */}
@@ -63,36 +63,7 @@ const PostDetailPage = () => {
             </div>
           </div>
           {/* Comments */}
-          <div>
-            <div className="p-2 flex gap-2">
-              <Avatar
-                className="border "
-                size="large"
-                src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-                icon={<UserOutlined />}
-              />
-              <div className="bg-gray-200 p-2 rounded-md mt-2">
-                <h1 className="font-bold color_dark_1">John Smith</h1>
-                <p className="text-sm   color_dark_2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  ornare magna eros.
-                </p>
-                <div className="flex justify-between items-center">
-                  <p className="text-[12px] my-1 cursor-pointer hover:underline color_dark_2">
-                    Like
-                  </p>
-                  <p className="text-[12px] my-1 cursor-pointer hover:underline color_dark_2">
-                    Reply
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Comment Input */}
-          <div className="p-2">
-            <CommentInput />
-          </div>
+          <div>{/* <Comment /> */}</div>
         </div>
       </div>
     </section>

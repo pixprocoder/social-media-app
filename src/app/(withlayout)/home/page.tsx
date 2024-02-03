@@ -1,5 +1,5 @@
+"use client";
 import React from "react";
-
 import "../../../Components/home/home.modules.css";
 import LeftSideBar from "../../../Components/home/LeftSideBar";
 import MainFeed from "../../../Components/home/MainFeed";
