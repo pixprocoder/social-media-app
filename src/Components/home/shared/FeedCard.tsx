@@ -20,7 +20,10 @@ const FeedCard = ({ data }: { data: IPost }) => {
     <div>
       {showComments ? (
         <div>
-          <PostCommentBox setShowComments={setShowComments} postId={data?._id} />
+          <PostCommentBox
+            setShowComments={setShowComments}
+            postId={data?._id}
+          />
         </div>
       ) : (
         <section>
