@@ -7,7 +7,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 const LeftSideBar = () => {
   return (
     <section>
-      <div className="flex flex-col justify-between  gap-4 min-h-[90vh]">
+      <div className="flex flex-col   gap-4 min-h-[90vh]">
         {/* Weather card */}
         <div className="bg-blue-500 bg-opacity-20 p-4 rounded-md">
           <div className="flex flex-col justify-between items-center ">
@@ -68,7 +68,7 @@ const LeftSideBar = () => {
         </div>
 
         {/* Recommended Card */}
-        <div className="bg-white p-4 rounded-md">
+        {/* <div className="bg-white p-4 rounded-md">
           <div>
             <div className="flex justify-between items-center">
               <h1 className="font_montserrat">Recommended Pages</h1>
@@ -82,7 +82,7 @@ const LeftSideBar = () => {
               </Button>
             </div>
             <hr className="mt-2" />
-            {/* pages 1 */}
+          
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
@@ -117,7 +117,7 @@ const LeftSideBar = () => {
               </span>
             </div>
             <hr className="" />
-            {/* 3 */}
+            
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
@@ -135,7 +135,7 @@ const LeftSideBar = () => {
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Latest activity */}
         <div className="bg-white p-4 rounded-md ">

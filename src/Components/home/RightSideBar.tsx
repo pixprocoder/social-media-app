@@ -8,7 +8,7 @@ import { FaGift, FaPlus } from "react-icons/fa6";
 const RightSideBar = () => {
   return (
     <section>
-      <div className="flex flex-col gap-4 justify-between min-h-[90vh]">
+      <div className="flex flex-col gap-4  min-h-[90vh]">
         <div className="bg-white p-4 rounded-md">
           <div>
             <div className="flex justify-between  items-center">
@@ -161,7 +161,7 @@ const RightSideBar = () => {
         </div>
 
         {/* Event */}
-        <div className="bg-blue-500 bg-opacity-15 p-4 rounded-md">
+        {/* <div className="bg-blue-500 bg-opacity-15 p-4 rounded-md">
           <div className="flex justify-between items-center">
             <h1 className="font_montserrat">
               <FaGift />
@@ -185,7 +185,7 @@ const RightSideBar = () => {
             </h1>
             <Button>Write Message</Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
