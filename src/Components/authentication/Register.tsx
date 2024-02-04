@@ -35,6 +35,8 @@ const Register: React.FC = () => {
       password: values.password,
     };
     const res = await setRegister(user);
+    console.log(res);
+    
 
     if ("data" in res && res.data?.accessToken) {
       setToLocalStorage(authKey, res.data.accessToken);
