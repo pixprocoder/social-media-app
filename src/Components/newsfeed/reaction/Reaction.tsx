@@ -37,7 +37,7 @@ const ReactionLabel = () => {
       // if (res?.data) {
 
       // }
-      dispatch(setPostId(""));
+      // dispatch(setPostId(""));
     }
   };
 
