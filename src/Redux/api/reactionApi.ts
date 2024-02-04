@@ -1,3 +1,12 @@
+/**
+ * Title: 'reaction rtk query define by Masum Rana '
+ * Description: ''
+ * Author: 'Masum Rana'
+ * Date: 04-02-2024
+ *
+*/
+
+
 import { IReaction } from "@/types/newsfeed";
 import { baseApi } from "./baseApi";
 
