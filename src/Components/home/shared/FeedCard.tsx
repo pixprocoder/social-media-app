@@ -8,10 +8,11 @@ import { IoSend } from "react-icons/io5";
 import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import Link from "next/link";
 import PostCommentBox from "../shared/PostCommentBox";
-import { useGetAllPostQuery } from "@/Redux/api/postApi";
+// import { useGetAllPostQuery } from "@/Redux/api/postApi";
 import { IPost } from "@/types/newsfeed";
 import Image from "next/image";
 import img from "/public/unnamed.webp";
+import Reactions from "@/Components/newsfeed/reaction/Reaction";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   const [showComments, setShowComments] = useState(false);
@@ -67,8 +68,8 @@ const FeedCard = ({ data }: { data: IPost }) => {
           <div className="flex justify-between gap-2 py-2">
             <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
               {" "}
-              <BiSolidLike />
-              <span className="font_raleway">Like</span>
+              {/* <BiSolidLike /> */}
+              <Reactions />
             </div>
             <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
               <button
