@@ -16,5 +16,5 @@ export interface IReaction {
   _id?: string;
   user?: string;
   post?: string;
-  reaction: "like" | "love" | "haha" | "sad" | "angry";
+  reaction: "like" | "love" | "haha" | "sad" | "wow" | "angry";
 }
