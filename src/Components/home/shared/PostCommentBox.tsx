@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { BsXCircle, BsEmojiSmile, BsCamera } from "react-icons/bs";
-import { Avatar } from "antd";
+import { Avatar, Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 // import EmojiPicker from "emoji-picker-react";
 import {
@@ -53,39 +53,42 @@ const PostCommentBox = ({ setShowComments, postId }: any) => {
           <Comment key={comment._id} comment={comment} />
         ))}
       </div>
-      <div className="mt-5 border-2 border-gray-300 rounded-lg shadow-lg">
-        <form onSubmit={handlePostComment}>
-          <textarea
-            required
-            name="commentbox"
-            className="outline-none w-full h-[100px] p-5 bg-gray-200"
-            placeholder="Write a comment..."
+      <div className="mt-5">
+        <div className="flex gap-2 ">
+          <Avatar
+            className="border-2"
+            size="large"
+            src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+            icon={<UserOutlined />}
           />
+          <div className="w-full mt-4 bg-gray-200 rounded-md ">
+            <form onSubmit={handlePostComment}>
+              <input
+                required
+                name="commentbox"
+                className="outline-none w-full p-2 text-sm bg-gray-200 rounded-md "
+                placeholder="Write your comment..."
+              />
 
-          <div className="flex justify-between px-2">
-            <Avatar
-              className="border-2"
-              size="large"
-              src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-              icon={<UserOutlined />}
-            />
-            {/* {showEmojiPicker && <EmojiPicker />} */}
-            <div className="flex  items-center gap-2 my-2">
-              <button>
-                <BsEmojiSmile className="text-xl" />
-              </button>
-              <button>
-                <BsCamera className="text-xl" />
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 rounded-lg bg-violet-500  font-semibold text-white hover:bg-violet-800"
-              >
-                Post Comment
-              </button>
-            </div>
+              <div className="flex w-full justify-between  items-center gap-2 p-2 ">
+                <div className="flex gap-2">
+                  <button>
+                    <BsEmojiSmile className="text-xl" />
+                  </button>
+                  <button>
+                    <BsCamera className="text-xl" />
+                  </button>
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-lg bg-violet-500  font-semibold text-white hover:bg-violet-800"
+                >
+                  Post Comment
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
