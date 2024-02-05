@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, Button } from "antd";
+import { Avatar, Button, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import { BiSolidLike } from "react-icons/bi";
@@ -19,8 +19,15 @@ import { useAppDispatch } from "@/Redux/hooks";
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
 import { RiShareForwardLine } from "react-icons/ri";
 import { TbShare3 } from "react-icons/tb";
+import { CiBookmark } from "react-icons/ci";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineHideSource } from "react-icons/md";
+import { FaRegBookmark } from "react-icons/fa6";
 
 const FeedCard = ({ data }: { data: IPost }) => {
+  const [open, setOpen] = useState(false);
+  console.log(open);
+
   const dispatch = useAppDispatch();
   dispatch(setPostId(data?._id as string));
   const [showComments, setShowComments] = useState(false);
@@ -29,23 +36,68 @@ const FeedCard = ({ data }: { data: IPost }) => {
     <section className="bg-white p-4 rounded-md">
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
-          <Avatar className="border " size="large" icon={<UserOutlined />} />
-
+          <Avatar
+            className=" cursor-pointer "
+            size="large"
+            icon={<UserOutlined />}
+          />
           <div className="flex flex-col">
-            <span className="user_heading">John Smith</span>
+            <span className="user_heading cursor-pointer hover:underline">
+              John Smith
+            </span>
             <small className="user_sub_heading font-light">
               July 26 2018, 01:03pm
             </small>
           </div>
         </div>
-        <Button
-          shape="circle"
-          className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
-        >
-          <span>
-            <BsThreeDots className="font-bold" />
-          </span>
-        </Button>
+        <div className="relative">
+          <Button
+            onClick={() => setOpen(!open)}
+            shape="circle"
+            className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+          >
+            <span>
+              <BsThreeDots className="font-bold" />
+            </span>
+          </Button>
+
+          {/* TODO: make reusable popup card    */}
+          <div className="absolute w-[200px] right-6">
+            {open ? (
+              <>
+                <div className="bg-gray-200 rounded-md p-3">
+                  <div className="flex flex-col">
+                    {/* Save Post */}
+                    <div>
+                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                        <FaRegBookmark className="" />
+                        <p className="text-sm">Save Post</p>
+                      </div>
+                      <Divider className="my-2" />
+                    </div>
+                    {/* Notification Post */}
+                    <div>
+                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                        <IoMdNotificationsOutline className="text-xl" />
+                        <p className="text-sm">Turn Off Notification</p>
+                      </div>
+                      <Divider className="my-2" />
+                    </div>
+                    {/* Save Post */}
+                    <div>
+                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
+                        <MdOutlineHideSource className="text-xl" />
+                        <p className="text-sm">Hide Post</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       </div>
       {/* Image and text */}
       <div>
