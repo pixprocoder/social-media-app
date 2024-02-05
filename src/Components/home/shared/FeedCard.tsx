@@ -59,34 +59,46 @@ const FeedCard = ({ data }: { data: IPost }) => {
 
       {/* Footer */}
       <div className="flex justify-between gap-2 py-2">
-        <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
-          <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
-            <div className="flex gap-2">
-              <Image
-                src={like}
-                width={20}
-                height={20}
-                alt="like icon"
-                className=" transion-all duration-300"
-              />
-              <h2>Like</h2>
-            </div>
-          </Dropdown>
+        <div className="flex flex-col w-full mt-2 justify-between">
+          <small className="text-start  mb-2">4 Likes</small>
+          <hr />
+          <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
+            <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
+              <div className="flex gap-2">
+                <Image
+                  src={like}
+                  width={20}
+                  height={20}
+                  alt="like icon"
+                  className=" transion-all duration-300"
+                />
+                <h2>Like</h2>
+              </div>
+            </Dropdown>
+          </div>
         </div>
-        <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
-          <button
-            onClick={() => setShowComments(true)}
-            className="flex items-center gap-2"
-          >
+        <div className="flex flex-col w-full mt-2 justify-between">
+          <small className="text-center  mb-2">4 comments</small>
+          <hr />
+          <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
+            <button
+              onClick={() => setShowComments(true)}
+              className="flex items-center gap-2"
+            >
+              {" "}
+              <FaComment />
+              <span className="font_raleway">Comment</span>
+            </button>
+          </div>
+        </div>
+        <div className="flex flex-col w-full mt-2 justify-between">
+          <small className="text-end  mb-2">0 share</small>
+          <hr />
+          <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
             {" "}
-            <FaComment />
-            <span className="font_raleway">Comment</span>
-          </button>
-        </div>
-        <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
-          {" "}
-          <IoSend />
-          <span className="font_raleway">Share</span>
+            <IoSend />
+            <span className="font_raleway">Share</span>
+          </div>
         </div>
       </div>
     </section>
