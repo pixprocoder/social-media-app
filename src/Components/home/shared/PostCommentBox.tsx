@@ -41,6 +41,13 @@ const PostCommentBox = ({ setShowComments, postId }: any) => {
           <BsXCircle className="text-xl" />
         </button>
       </div>
+      {comments?.length > 2 ? (
+        <p className="text-sm underline cursor-pointer my-2">
+          View All Comments
+        </p>
+      ) : (
+        ""
+      )}
       <div className=" w-full">
         {comments?.map((comment: IComment) => (
           <Comment key={comment._id} comment={comment} />
