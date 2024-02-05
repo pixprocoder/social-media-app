@@ -13,7 +13,7 @@ const MainFeed = () => {
         <div className="bg-white  rounded-md">
           <FeedPostCard />
         </div>
-        <div>
+        <div className="flex flex-col mt-4  gap-4">
           {allPost?.map((post: IPost) => (
             <FeedCard key={post?.user} data={post} />
           ))}
