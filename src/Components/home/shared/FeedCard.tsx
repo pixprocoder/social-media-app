@@ -23,10 +23,12 @@ import { CiBookmark } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineHideSource } from "react-icons/md";
 import { FaRegBookmark } from "react-icons/fa6";
+import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   const [open, setOpen] = useState(false);
   console.log(open);
+  const { data: comments } = useGetAllCommentQuery(data._id);
 
   const dispatch = useAppDispatch();
   dispatch(setPostId(data?._id as string));
@@ -104,7 +106,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
         <div>
           <p className="font-light text-sm my-2">{data?.postText}</p>
         </div>
-        <Link href={`/photo/id`}>
+        <Link href={`/photo/${data._id}`}>
           <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
             <Image src={img} width={300} height={300} alt="user post img" />
           </div>
@@ -132,7 +134,9 @@ const FeedCard = ({ data }: { data: IPost }) => {
           </div>
         </div>
         <div className="flex flex-col w-full mt-2 justify-between">
-          <small className="text-center  mb-2">4 comments</small>
+          <div className="text-center text-sm  mb-2">
+            {comments?.length} {comments?.length <= 1 ? "comment" : "comments"}
+          </div>
           <hr />
           <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
             <button
