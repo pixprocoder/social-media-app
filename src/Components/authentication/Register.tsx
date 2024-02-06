@@ -54,7 +54,7 @@ const Register = () => {
 
   return (
     <div className="lg:w-[600px]  p-10 shadow-sm bg-transparent shadow-violet-500 rounded-lg">
-      <h2 className="text-center font-bold text-5xl mb-10  text-white">
+      <h2 className="text-center font-bold text-5xl mb-10  text-violet-500">
         Register
       </h2>
       <Form
@@ -153,7 +153,7 @@ const Register = () => {
           Already Have an Account?{" "}
           <button
             onClick={() => dispatch(changeAuthState())}
-            className="text-blue-400 underline ml-2 text-sm "
+            className="hover:text-violet-400 text-violet-400  underline ml-2 text-sm "
           >
             Please Login
           </button>{" "}

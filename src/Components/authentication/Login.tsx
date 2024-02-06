@@ -44,7 +44,9 @@ const Login = () => {
 
   return (
     <div className="lg:w-[600px]  p-10 shadow-sm bg-transparent shadow-violet-500 rounded-lg">
-      <h2 className="text-center font-bold text-5xl mb-10 text-white">Login</h2>
+      <h2 className="text-center font-bold text-5xl mb-10  text-violet-500">
+        Login
+      </h2>
       <Form
         name="normal_login"
         className="login-form"
@@ -101,7 +103,7 @@ const Login = () => {
           New to CircleUp? {"  "}
           <button
             onClick={() => dispatch(changeAuthState())}
-            className="text-blue-400 underline text-sm ml-1"
+            className="hover:text-violet-400 text-violet-400 underline text-sm ml-1"
           >
             Please Register
           </button>{" "}
