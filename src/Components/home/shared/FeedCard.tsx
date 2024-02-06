@@ -7,15 +7,16 @@ import { FaComment, FaRegComment } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import Link from "next/link";
+
 import PostCommentBox from "../shared/PostCommentBox";
 import { IPost } from "@/types/newsfeed";
 import Image from "next/image";
 import img from "/public/unnamed.webp";
 import Reactions from "@/Components/newsfeed/reaction/Reaction";
 import { Dropdown } from "antd";
-import like from "/public/assets/reaction/like.png";
+
 import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
-import { useAppDispatch } from "@/Redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
 import { RiShareForwardLine } from "react-icons/ri";
 import { TbShare3 } from "react-icons/tb";
@@ -26,8 +27,11 @@ import { FaRegBookmark } from "react-icons/fa6";
 import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
 
 const FeedCard = ({ data }: { data: IPost }) => {
-  const [open, setOpen] = useState(false);
-  console.log(open);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { reaction } = useAppSelector((state) => state.reaction);
+  console.log(reaction);
+
   const { data: comments } = useGetAllCommentQuery(data._id);
 
   const dispatch = useAppDispatch();
@@ -54,7 +58,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
         </div>
         <div className="relative">
           <Button
-            onClick={() => setOpen(!open)}
+            onClick={() => setIsOpen(!isOpen)}
             shape="circle"
             className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
           >
@@ -65,7 +69,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
 
           {/* TODO: make reusable popup card    */}
           <div className="absolute w-[200px] right-6">
-            {open ? (
+            {isOpen ? (
               <>
                 <div className="bg-gray-200 rounded-md p-3">
                   <div className="flex flex-col">
@@ -122,13 +126,17 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
-                  src={like}
+                  src={
+                    reaction
+                      ? `/assets/reaction/${reaction}.png`
+                      : "/assets/reaction/likeOutline.png"
+                  }
                   width={20}
                   height={20}
                   alt="like icon"
                   className=" transion-all duration-300"
                 />
-                <h2>Like</h2>
+                <h2>{reaction ? reaction : "Like"} </h2>
               </div>
             </Dropdown>
           </div>

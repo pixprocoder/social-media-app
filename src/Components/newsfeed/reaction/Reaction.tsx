@@ -12,14 +12,18 @@ import love from "/public/assets/reaction/love.png";
 import sad from "/public/assets/reaction/sad.png";
 import wow from "/public/assets/reaction/wow.png";
 import angry from "/public/assets/reaction/angry.png";
-import haha from "/public/assets/reaction/ha.png";
+import haha from "/public/assets/reaction/haha.png";
+import like from "/public/assets/reaction/like.png";
 import Image from "next/image";
-import like from "/public/assets/reaction/like (1).png";
-import { useSubmitReactionMutation } from "@/Redux/api/reactionApi";
+import {
+  useGetAllReactionQuery,
+  useSubmitReactionMutation,
+} from "@/Redux/api/reactionApi";
 import { useAppSelector } from "@/Redux/hooks";
 import { IReaction } from "@/types/newsfeed";
 import { useDispatch } from "react-redux";
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
+import { setReaction } from "@/Redux/Slices/reactionSlice";
 
 const ReactionLabel = () => {
   // redux
@@ -39,7 +43,7 @@ const ReactionLabel = () => {
         reaction: React,
       };
 
-      console.log(reaction);
+      dispatch(setReaction(reaction.reaction));
 
       const res = await await submitReaction(reaction);
       // if (res?.data) {

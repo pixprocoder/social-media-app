@@ -15,6 +15,7 @@ import { IComment } from "@/types/newsfeed";
 const PostDetailPage = ({ params }) => {
   const id = params.postId;
   const { data: comments } = useGetAllCommentQuery(id);
+  // console.log(id);
 
   return (
     <div className="flex flex-col lg:flex-row pt-4 lg:pt-24  min-h-[95vh] ">
