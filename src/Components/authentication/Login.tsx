@@ -85,7 +85,7 @@ const Login = () => {
             </Form.Item>
 
             <a className="login-form-forgot text-gray-100" href="">
-              Forgot password
+              Forgot password?
             </a>
           </div>
         </Form.Item>
