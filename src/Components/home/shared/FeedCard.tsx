@@ -20,9 +20,10 @@ import { setPostId } from "@/Redux/Slices/unitlitySlice";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   const dispatch = useAppDispatch();
-  dispatch(setPostId(data?._id as string));
   const [showComments, setShowComments] = useState(false);
-
+  const handleAddedPostId = () => {
+    dispatch(setPostId(data?._id as string));
+  };
   return (
     <div>
       {showComments ? (
@@ -72,7 +73,10 @@ const FeedCard = ({ data }: { data: IPost }) => {
 
           {/* Footer */}
           <div className="flex justify-between gap-2 py-2">
-            <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
+            <div
+              className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 "
+              onMouseEnter={handleAddedPostId}
+            >
               <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
                 <div className="flex gap-2">
                   <Image

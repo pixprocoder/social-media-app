@@ -4,7 +4,7 @@
  * Author: 'Masum Rana'
  * Date: 04-02-2024
  *
-*/
+ */
 
 "use client";
 import React, { useState } from "react";
@@ -31,21 +31,13 @@ const ReactionLabel = () => {
   const handleSubmitReaction = async (
     React: "like" | "love" | "haha" | "sad" | "wow" | "angry"
   ) => {
-    // setReact(React);
-    // console.log(React);
     if (React.length >= 2 && post.length >= 5) {
       const reaction: IReaction = {
         post: post,
         reaction: React,
       };
 
-      console.log(reaction);
-
-      const res = await await submitReaction(reaction);
-      // if (res?.data) {
-
-      // }
-      // dispatch(setPostId(""));
+      await await submitReaction(reaction);
     }
   };
 
