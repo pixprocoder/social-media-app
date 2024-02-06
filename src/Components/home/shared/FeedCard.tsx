@@ -1,30 +1,25 @@
 "use client";
-import { Avatar, Button, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
-import { BiSolidLike } from "react-icons/bi";
-import { FaComment, FaRegComment } from "react-icons/fa";
-import { IoSend } from "react-icons/io5";
-import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
+import { Avatar, Button, Divider } from "antd";
 import Link from "next/link";
+import { useState } from "react";
+import { BsThreeDots } from "react-icons/bs";
+import { FaRegComment } from "react-icons/fa";
 
-import PostCommentBox from "../shared/PostCommentBox";
 import { IPost } from "@/types/newsfeed";
-import Image from "next/image";
-import img from "/public/unnamed.webp";
-import Reactions from "@/Components/newsfeed/reaction/Reaction";
 import { Dropdown } from "antd";
+import Image from "next/image";
+import PostCommentBox from "../shared/PostCommentBox";
+import img from "/public/unnamed.webp";
 
 import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
-import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
-import { RiShareForwardLine } from "react-icons/ri";
-import { TbShare3 } from "react-icons/tb";
-import { CiBookmark } from "react-icons/ci";
+import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import { FaRegBookmark } from "react-icons/fa6";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineHideSource } from "react-icons/md";
-import { FaRegBookmark } from "react-icons/fa6";
-import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
+import { TbShare3 } from "react-icons/tb";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   const [isOpen, setIsOpen] = useState(false);

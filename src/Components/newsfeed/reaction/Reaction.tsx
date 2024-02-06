@@ -7,7 +7,7 @@
  */
 
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import love from "/public/assets/reaction/love.png";
 import sad from "/public/assets/reaction/sad.png";
 import wow from "/public/assets/reaction/wow.png";
@@ -29,7 +29,7 @@ const ReactionLabel = () => {
   // redux
   const dispatch = useDispatch();
   const [submitReaction] = useSubmitReactionMutation();
-  const { post } = useAppSelector((state) => state.utilitySlice);
+  const { post: id } = useAppSelector((state) => state.utilitySlice);
   // console.log(post);
 
   const handleSubmitReaction = async (
@@ -37,13 +37,14 @@ const ReactionLabel = () => {
   ) => {
     // setReact(React);
     // console.log(React);
-    if (React.length >= 2 && post.length >= 5) {
-      const reaction: IReaction = {
-        post: post,
+    if (React.length >= 2 && id.length >= 5) {
+      const reaction = {
+        post: id,
         reaction: React,
       };
+      console.log(reaction);
 
-      dispatch(setReaction(reaction.reaction));
+      dispatch(setReaction(reaction));
 
       const res = await await submitReaction(reaction);
       // if (res?.data) {

@@ -2,19 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface IInitialState {
-  reaction: string;
+  id: null;
+  React: null;
 }
 
 const initialState: IInitialState = {
-  reaction: "",
+  id: null,
+  React: null,
 };
 
 export const reactionSlice = createSlice({
   name: "reaction",
   initialState,
   reducers: {
-    setReaction: (state, action: PayloadAction<string>) => {
-      state.reaction = action.payload;
+    setReaction: (state, action) => {
+      state.id = action.payload.reaction.id;
+      state.React = action.payload.reaction.reaction;
     },
   },
 });
