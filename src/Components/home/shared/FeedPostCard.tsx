@@ -105,7 +105,7 @@ const FeedPostCard = () => {
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-bold text-sm">Samsul kobir</p>
+                  <p className="font-bold text-md">Samsul kobir</p>
                   <Select>
                     <SelectTrigger className="w-[90px] bg-white text-black px-2">
                       <SelectValue placeholder="Public" />
@@ -120,7 +120,7 @@ const FeedPostCard = () => {
                   </Select>
                 </div>
               </div>
-              <input
+              <Textarea
                 name="post"
                 value={postText}
                 className="w-full outline-none  text-xl py-4"
