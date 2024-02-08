@@ -32,9 +32,10 @@ const FeedCard = ({ data }: { data: IPost }) => {
   const { data: comments } = useGetAllCommentQuery(data._id);
 
   const dispatch = useAppDispatch();
-  dispatch(setPostId(data?._id as string));
   const [showComments, setShowComments] = useState(false);
-
+  const handleAddedPostId = () => {
+    dispatch(setPostId(data?._id as string));
+  };
   return (
     <section
       className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
@@ -124,6 +125,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
         </Link>
       </div>
 
+
       {/* Footer */}
       <div className="flex justify-between gap-2 py-2">
         <div className="flex flex-col w-full mt-2 justify-between">
@@ -164,6 +166,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
               onClick={() => setShowComments(true)}
               className="flex items-center gap-2"
             >
+ 
               {" "}
               <FaRegComment className="text-xl" />
               <span className="font-raleway">Comment</span>
