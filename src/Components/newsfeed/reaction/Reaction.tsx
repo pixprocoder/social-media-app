@@ -6,8 +6,8 @@
  *
  */
 
-"use client";
-import React, { useEffect, useState } from "react";
+// Use "client" instead of "use client"
+import React, { useState } from "react";
 import love from "/public/assets/reaction/love.png";
 import sad from "/public/assets/reaction/sad.png";
 import wow from "/public/assets/reaction/wow.png";
@@ -30,27 +30,22 @@ const ReactionLabel = () => {
   const dispatch = useDispatch();
   const [submitReaction] = useSubmitReactionMutation();
   const { post: id } = useAppSelector((state) => state.utilitySlice);
-  // console.log(post);
 
   const handleSubmitReaction = async (
-    React: "like" | "love" | "haha" | "sad" | "wow" | "angry"
+    reactionType: "like" | "love" | "haha" | "sad" | "wow" | "angry"
   ) => {
- 
-    // setReact(React);
-    // console.log(React);
-    if (React.length >= 2 && id.length >= 5) {
-      const reaction = {
-        post: id,
- 
-    if (React.length >= 2 && post.length >= 5) {
+    if (id && id.length >= 5) {
       const reaction: IReaction = {
-        post: post,
-
-        reaction: React,
+        post: id,
+        reaction: reactionType,
       };
-      // console.log(reaction);
 
- 
+      // Dispatch setPostId and setReaction actions
+      dispatch(setPostId(id));
+      dispatch(setReaction(reaction));
+
+      // Perform the submitReaction mutation here if needed
+      // await submitReaction(reaction);
     }
   };
 
