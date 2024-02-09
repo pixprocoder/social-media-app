@@ -1,14 +1,18 @@
-import { IName } from "./auth";
+import { IName, IUser } from "./auth";
 
 export type IUserSpecificField = {
   userId?: string;
-  name: IName;
+  name: {
+    firstName: string;
+    lastName?: string;
+  };
   profilePicture?: string;
 };
 
 export interface IPost {
+  createdAt: ReactNode;
   _id?: string;
-  user?: string | IUserSpecificField;
+  user?: IUser | IUserSpecificField;
   postText: string;
   Images?: string[];
 }

@@ -20,6 +20,7 @@ import { MdOutlineHideSource } from "react-icons/md";
 import { TbShare3 } from "react-icons/tb";
 import FullName from "@/service/name.service";
 import { IName } from "@/types/auth";
+import { log } from "console";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   // console.log(data)
@@ -37,7 +38,29 @@ const FeedCard = ({ data }: { data: IPost }) => {
   const handleAddedPostId = () => {
     dispatch(setPostId(data?._id as string));
   };
+  // let fullName = "Unknown Person";
+  // if (data?.user && "name" in data?.user) {
+  //   name = data?.user.name;
+  // }
   const fullName = FullName(data?.user?.name as IName);
+  const userProfilePicture =
+    typeof data?.user === "object" && "profilePicture" in data.user
+      ? data.user.profilePicture
+      : "";
+
+  // const targetDate = new Date("July 26, 2018 13:03:00");
+
+  // const options = {
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  //   hour: "numeric",
+  //   minute: "numeric",
+  //   hour12: true,
+  // };
+
+  // const formattedDate = targetDate.toLocaleString("en-US", options);
+
   return (
     <section
       className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
@@ -45,7 +68,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
           <Avatar
-            // src={}
+            src={userProfilePicture}
             className=" cursor-pointer "
             size="large"
             icon={<UserOutlined />}
@@ -59,7 +82,8 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <small
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline  user_sub_heading font-light`}
             >
-              July 26 2018, 01:03pm
+              {/* July 26 2018, 01:03pm */}
+              {data?.createdAt}
             </small>
           </div>
         </div>
