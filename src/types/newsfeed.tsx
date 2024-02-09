@@ -10,7 +10,6 @@ export type IUserSpecificField = {
 };
 
 export interface IPost {
-  createdAt: ReactNode;
   _id?: string;
   user?: IUser | IUserSpecificField;
   postText: string;
@@ -19,7 +18,7 @@ export interface IPost {
 
 export interface IComment {
   _id?: string;
-  user?: string | IUserSpecificField;
+  user?: IUser | IUserSpecificField;
   post?: string;
   comment: string;
 }

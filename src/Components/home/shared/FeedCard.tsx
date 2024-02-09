@@ -82,8 +82,8 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <small
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline  user_sub_heading font-light`}
             >
-              {/* July 26 2018, 01:03pm */}
-              {data?.createdAt}
+              July 26 2018, 01:03pm
+              {/* {data?.createdAt} */}
             </small>
           </div>
         </div>
