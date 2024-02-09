@@ -30,7 +30,6 @@ const ReactionLabel = () => {
   const dispatch = useDispatch();
   const [submitReaction] = useSubmitReactionMutation();
   const { post: id } = useAppSelector((state) => state.utilitySlice);
-
   const handleSubmitReaction = async (
     reactionType: "like" | "love" | "haha" | "sad" | "wow" | "angry"
   ) => {
@@ -43,6 +42,7 @@ const ReactionLabel = () => {
       // Dispatch setPostId and setReaction actions
       dispatch(setPostId(id));
       dispatch(setReaction(reaction));
+      console.log(reaction);
 
       // Perform the submitReaction mutation here if needed
       const res = await submitReaction(reaction);

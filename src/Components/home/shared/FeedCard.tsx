@@ -5,13 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
-
 import { IPost } from "@/types/newsfeed";
 import { Dropdown } from "antd";
 import Image from "next/image";
 import PostCommentBox from "../shared/PostCommentBox";
 import img from "/public/unnamed.webp";
-
 import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
 import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
@@ -20,8 +18,11 @@ import { FaRegBookmark } from "react-icons/fa6";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineHideSource } from "react-icons/md";
 import { TbShare3 } from "react-icons/tb";
+import FullName from "@/service/name.service";
+import { IName } from "@/types/auth";
 
 const FeedCard = ({ data }: { data: IPost }) => {
+  // console.log(data)
   const [isOpen, setIsOpen] = useState(false);
 
   const theme = useAppSelector((state) => state.themeSlice.theme);
@@ -36,6 +37,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
   const handleAddedPostId = () => {
     dispatch(setPostId(data?._id as string));
   };
+  const fullName = FullName(data?.user?.name as IName);
   return (
     <section
       className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
@@ -43,6 +45,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
           <Avatar
+            // src={}
             className=" cursor-pointer "
             size="large"
             icon={<UserOutlined />}
@@ -51,7 +54,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <span
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline`}
             >
-              John Smith
+              {fullName}
             </span>
             <small
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline  user_sub_heading font-light`}
@@ -125,7 +128,6 @@ const FeedCard = ({ data }: { data: IPost }) => {
         </Link>
       </div>
 
-
       {/* Footer */}
       <div className="flex justify-between gap-2 py-2">
         <div className="flex flex-col w-full mt-2 justify-between">
@@ -166,7 +168,6 @@ const FeedCard = ({ data }: { data: IPost }) => {
               onClick={() => setShowComments(true)}
               className="flex items-center gap-2"
             >
- 
               {" "}
               <FaRegComment className="text-xl" />
               <span className="font-raleway">Comment</span>
