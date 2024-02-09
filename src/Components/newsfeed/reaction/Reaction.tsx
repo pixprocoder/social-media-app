@@ -45,7 +45,8 @@ const ReactionLabel = () => {
       dispatch(setReaction(reaction));
 
       // Perform the submitReaction mutation here if needed
-      // await submitReaction(reaction);
+      const res = await submitReaction(reaction);
+      console.log(res);
     }
   };
 
