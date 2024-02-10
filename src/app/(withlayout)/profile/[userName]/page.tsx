@@ -13,7 +13,6 @@ import React, { useState } from "react";
 const ProfilePage = ({ params }: { params: any }) => {
   const id = params?.userName;
   const [activeTab, setActiveTab] = useState<any>(profileMenuItems[0].key);
-
   const handleMenuClick = (itemId: any) => {
     setActiveTab(itemId);
   };
@@ -44,13 +43,13 @@ const ProfilePage = ({ params }: { params: any }) => {
       </div>
       <hr className=" mt-4" />
       <div>
-        <div className="flex flex-wrap gap-4 mt-2 ">
+        <div className="flex flex-wrap gap-4 my-2 ">
           <div className=" flex flex-wrap gap-4 justify-center items-center ">
             {profileMenuItems.map((item) => (
               <>
                 <span
                   key={item.key}
-                  className={`tab transition tab-lifted  cursor-pointer  p-2 text-sm text-md font-bold  ${
+                  className={`tab transition tab-lifted   cursor-pointer  p-2 text-sm text-md font-bold  ${
                     activeTab === item.key
                       ? " duration-200 tab-active border-violet-600 border-b-2  text-violet-600 "
                       : ""
