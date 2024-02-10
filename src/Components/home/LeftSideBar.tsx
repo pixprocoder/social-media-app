@@ -16,9 +16,9 @@ const LeftSideBar = () => {
     <section>
       <div className="flex flex-col   gap-4 ">
         {/* Weather card */}
-        {/* <div>
+        <div>
           <Weather />
-        </div> */}
+        </div>
 
         {/* Recommended Card */}
         {/* <div className="bg-white p-4 rounded-md">

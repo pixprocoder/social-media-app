@@ -6,7 +6,7 @@
  *
  */
 
-// Use "client" instead of "use client"
+"use client";
 import React, { useState } from "react";
 import love from "/public/assets/reaction/love.png";
 import sad from "/public/assets/reaction/sad.png";
@@ -15,21 +15,17 @@ import angry from "/public/assets/reaction/angry.png";
 import haha from "/public/assets/reaction/haha.png";
 import like from "/public/assets/reaction/like.png";
 import Image from "next/image";
-import {
-  useGetAllReactionQuery,
-  useSubmitReactionMutation,
-} from "@/Redux/api/reactionApi";
 import { useAppSelector } from "@/Redux/hooks";
 import { IReaction } from "@/types/newsfeed";
 import { useDispatch } from "react-redux";
-import { setPostId } from "@/Redux/Slices/unitlitySlice";
-import { setReaction } from "@/Redux/Slices/reactionSlice";
+import { useSubmitReactionMutation } from "@/Redux/api/reactionApi";
 
 const ReactionLabel = () => {
   // redux
   const dispatch = useDispatch();
   const [submitReaction] = useSubmitReactionMutation();
   const { post: id } = useAppSelector((state) => state.utilitySlice);
+
   const handleSubmitReaction = async (
     reactionType: "like" | "love" | "haha" | "sad" | "wow" | "angry"
   ) => {
@@ -38,15 +34,7 @@ const ReactionLabel = () => {
         post: id,
         reaction: reactionType,
       };
-
-      // Dispatch setPostId and setReaction actions
-      dispatch(setPostId(id));
-      dispatch(setReaction(reaction));
-      console.log(reaction);
-
-      // Perform the submitReaction mutation here if needed
-      const res = await submitReaction(reaction);
-      console.log(res);
+      await submitReaction(reaction);
     }
   };
 

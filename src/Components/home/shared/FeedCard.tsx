@@ -20,7 +20,6 @@ import { MdOutlineHideSource } from "react-icons/md";
 import { TbShare3 } from "react-icons/tb";
 import FullName from "@/service/name.service";
 import { IName } from "@/types/auth";
-import { log } from "console";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   // console.log(data)
@@ -35,13 +34,11 @@ const FeedCard = ({ data }: { data: IPost }) => {
 
   const dispatch = useAppDispatch();
   const [showComments, setShowComments] = useState(false);
+
   const handleAddedPostId = () => {
     dispatch(setPostId(data?._id as string));
   };
-  // let fullName = "Unknown Person";
-  // if (data?.user && "name" in data?.user) {
-  //   name = data?.user.name;
-  // }
+
   const fullName = FullName(data?.user?.name as IName);
   const userProfilePicture =
     typeof data?.user === "object" && "profilePicture" in data.user
@@ -161,7 +158,10 @@ const FeedCard = ({ data }: { data: IPost }) => {
             4 Likes
           </small>
           <hr />
-          <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
+          <div
+            className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 "
+            onMouseEnter={handleAddedPostId}
+          >
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
