@@ -43,7 +43,7 @@ const ProfilePage = ({ params }: { params: any }) => {
       </div>
 
       <div>
-        <div className="flex flex-wrap gap-4 my-2 ">
+        <div className="flex flex-wrap justify-center gap-4 my-2 ">
           <div className=" flex flex-wrap gap-4 justify-center items-center ">
             {profileMenuItems.map((item) => (
               <>

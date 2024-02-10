@@ -21,13 +21,13 @@ import PostCommentBox from "../shared/PostCommentBox";
 import img from "/public/unnamed.webp";
 import likeOutline from "/public/assets/reaction/likeOutline.png";
 
-const FeedCard = ({ data }: { data: IPost }) => {
+const FeedCard = ({ data }: { data?: IPost }) => {
   const [showComments, setShowComments] = useState(false);
 
   // redux
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.themeSlice.theme);
-  const { data: comments } = useGetAllCommentQuery(data._id);
+  const { data: comments } = useGetAllCommentQuery(data?._id);
   const { data: reactions } = useGetAllReactionQuery(data?._id);
 
   // handle added post id  for submiting post related work
@@ -133,7 +133,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
             {data?.postText}
           </p>
         </div>
-        <Link href={`/profile/${data?.user?.userId}`}>
+        <Link href={`/photo/${data?.user?.userId}`}>
           <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
             <Image src={img} width={300} height={300} alt="user post img" />
           </div>
