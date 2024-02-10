@@ -1,51 +1,53 @@
 "use client";
-
-// essesential Imports
-
 import { Avatar, Button, Dropdown } from "antd";
-// icons
 import { UserOutlined } from "@ant-design/icons";
 import { BsThreeDots } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 import { TbShare3 } from "react-icons/tb";
-
-// framework essetional
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-// Components
 import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
 import FullName from "@/service/name.service";
 import PostCommentBox from "../shared/PostCommentBox";
-
-// types
 import { IName } from "@/types/auth";
-import { IPost } from "@/types/newsfeed";
-
-// side data
+import { IPost, IReaction } from "@/types/newsfeed";
 import img from "/public/unnamed.webp";
-
-// redux essential imports
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
 import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import PostCardDrwopDownItem from "../Dropdowns/Items/PostCardItems";
+import { useGetAllReactionQuery } from "@/Redux/api/reactionApi";
+import { getUserInfo } from "@/service/auth.service";
+import { getUserReaction } from "@/utils/getUserSpecificReaction";
+// reaction
+import likeOutline from "/public/assets/reaction/likeOutline.png";
+import like from "/public/assets/reaction/like.png";
+import love from "/public/assets/reaction/love.png";
+import haha from "/public/assets/reaction/haha.png";
+import sad from "/public/assets/reaction/sad.png";
 
 const FeedCard = ({ data }: { data: IPost }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [showComments, setShowComments] = useState(false);
 
   // redux
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.themeSlice.theme);
-  const reaction = useAppSelector((state) => state.reaction.reaction);
   const { data: comments } = useGetAllCommentQuery(data._id);
+  const { data: reactions } = useGetAllReactionQuery(data?._id);
 
   // handle added post id  for submiting post related work
   const handleAddedPostId = () => {
     dispatch(setPostId(data?._id as string));
   };
+
+  let reaction: IReaction = {
+    reaction: "like",
+  };
+  if (reactions && reactions.length > 0) {
+    const userReaction = getUserReaction(reactions as IReaction[]);
+    reaction = userReaction as unknown as IReaction;
+  }
 
   // extract data for use
   const fullName = FullName(data?.user?.name as IName);
@@ -53,6 +55,12 @@ const FeedCard = ({ data }: { data: IPost }) => {
     typeof data?.user === "object" && "profilePicture" in data.user
       ? data.user.profilePicture
       : "";
+
+  const reactionImg = reaction?.reaction
+    ? `${reaction?.reaction}`
+    : `${likeOutline}`;
+
+  // console.log(reactionImg);
 
   return (
     <section
@@ -132,17 +140,13 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
-                  src={
-                    reaction
-                      ? `/assets/reaction/${reaction}.png`
-                      : "/assets/reaction/likeOutline.png"
-                  }
+                  src={likeOutline }
                   width={20}
                   height={20}
                   alt="like icon"
                   className=" transion-all duration-300"
                 />
-                <h2>{reaction ? reaction : "Like"} </h2>
+                <h2>{"like"} </h2>
               </div>
             </Dropdown>
           </div>
