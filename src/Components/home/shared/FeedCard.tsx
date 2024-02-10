@@ -62,29 +62,50 @@ const FeedCard = ({ data }: { data: IPost }) => {
 
   // console.log(reactionImg);
 
+  // Date format
+  const formatDate = (createdAt: any) => {
+    const date = new Date(createdAt);
+    const monthAbbreviation = date.toLocaleString("default", {
+      month: "short",
+    }); // Get abbreviated month
+    const day = date.getDate();
+    const year = date.getFullYear();
+    let hour = date.getHours();
+    const minute = date.getMinutes();
+    const ampm = hour >= 12 ? "PM" : "AM";
+
+    // Convert hour from 24-hour format to 12-hour format
+    hour = hour % 12;
+    hour = hour ? hour : 12; // 0 should be converted to 12
+
+    return `${monthAbbreviation} ${day}, ${year}, ${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+  };
+
   return (
     <section
       className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
     >
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
-          <Avatar
-            src={userProfilePicture}
-            className=" cursor-pointer "
-            size="large"
-            icon={<UserOutlined />}
-          />
+          <Link href="/profile">
+            <Avatar
+              src={userProfilePicture}
+              className=" cursor-pointer "
+              size="large"
+              icon={<UserOutlined />}
+            />
+          </Link>
           <div className={`flex flex-col`}>
-            <span
+            <Link
+              href="/profile"
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline`}
             >
               {fullName}
-            </span>
+            </Link>
             <small
-              className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline  user_sub_heading font-light`}
+              className={`${theme === "light" ? "text-white" : " text-gray-900"}  user_sub_heading font-light`}
             >
-              July 26 2018, 01:03pm
-              {/* {data?.createdAt} */}
+              {formatDate(data?.createdAt)}
             </small>
           </div>
         </div>
@@ -112,7 +133,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
       <div>
         <div>
           <p
-            className={`${theme === "light" ? "text-white" : " text-gray-900"}  font-light text-sm my-2`}
+            className={`${theme === "light" ? "text-white" : " text-gray-900"}   my-2`}
           >
             {data?.postText}
           </p>
@@ -140,7 +161,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
-                  src={likeOutline }
+                  src={likeOutline}
                   width={20}
                   height={20}
                   alt="like icon"

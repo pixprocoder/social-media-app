@@ -14,6 +14,7 @@ export interface IPost {
   user?: IUser | IUserSpecificField;
   postText: string;
   Images?: string[];
+  createdAt?: string;
 }
 
 export interface IComment {

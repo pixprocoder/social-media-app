@@ -7,7 +7,7 @@ const nextConfig = {
   images: {
     domains: ["www.gravatar.com"], // Add the domain here
   },
-  reactStrictMode:false,
+  reactStrictMode: false,
   async headers() {
     return [
       {
