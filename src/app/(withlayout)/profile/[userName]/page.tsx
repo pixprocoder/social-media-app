@@ -41,7 +41,7 @@ const ProfilePage = ({ params }: { params: any }) => {
         </div>
         <Button>Edit</Button>
       </div>
-      <hr className=" mt-4" />
+
       <div>
         <div className="flex flex-wrap gap-4 my-2 ">
           <div className=" flex flex-wrap gap-4 justify-center items-center ">
@@ -63,6 +63,7 @@ const ProfilePage = ({ params }: { params: any }) => {
           </div>
         </div>
       </div>
+      <hr className=" my-4" />
       {/* Conditionally rendering components based on active tabs */}
       <div>
         {activeTab === 1 ? (
