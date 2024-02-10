@@ -20,6 +20,15 @@ import PostCardDrwopDownItem from "../Dropdowns/Items/PostCardItems";
 import PostCommentBox from "../shared/PostCommentBox";
 import img from "/public/unnamed.webp";
 import likeOutline from "/public/assets/reaction/likeOutline.png";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/Components/ui/dialog";
+import { AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 
 const FeedCard = ({ data }: { data?: IPost }) => {
   const [showComments, setShowComments] = useState(false);
@@ -143,11 +152,25 @@ const FeedCard = ({ data }: { data?: IPost }) => {
       {/* Footer */}
       <div className="flex justify-between gap-2 py-2">
         <div className="flex flex-col w-full mt-2 justify-between">
-          <small
-            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-start  mb-2`}
-          >
-            4 Likes
-          </small>
+          {/* Reaction Detail modal */}
+          <Dialog>
+            <DialogTrigger className="flex">
+              <small
+                className={`${theme === "light" ? "text-white" : " text-gray-900"} text-start  mb-2 hover:underline`}
+              >
+                4 Likes
+              </small>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]  bg-white">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold">
+                  Reactions
+                </DialogTitle>
+              </DialogHeader>
+              <hr />
+            </DialogContent>
+          </Dialog>
+
           <hr />
           <div
             className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 "

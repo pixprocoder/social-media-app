@@ -7,6 +7,8 @@ import ProfileVideos from "@/Components/profile/Videos";
 import { Avatar, AvatarImage } from "@/Components/ui/avatar";
 import { Button } from "@/Components/ui/button";
 import { profileMenuItems } from "@/constants/profileMenu";
+import { CiEdit } from "react-icons/ci";
+
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -39,7 +41,10 @@ const ProfilePage = ({ params }: { params: any }) => {
             </div>
           </div>
         </div>
-        <Button>Edit</Button>
+        <Button>
+          <CiEdit className="mr-2" />
+          Edit
+        </Button>
       </div>
 
       <div>
