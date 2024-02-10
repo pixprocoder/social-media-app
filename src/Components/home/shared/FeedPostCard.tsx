@@ -82,14 +82,14 @@ const FeedPostCard = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <Dialog>
-            <DialogTrigger className="w-full outline-none p-2 rounded-md bg-white ">
+            <DialogTrigger className="w-full outline-none rounded-md bg-white ">
               <input
                 name="post"
-                className="w-full outline-none"
+                className="w-full outline-none border rounded-xl p-2"
                 placeholder="What's on your mind?"
               />
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] bg-white">
+            <DialogContent className="sm:max-w-[425px]  bg-white">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold">
                   Create Post
