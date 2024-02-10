@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/Components/ui/select";
 import { Textarea } from "@/Components/ui/textarea";
-import { useSubmitPostMutation } from "@/Redux/api/postApi";
+import { useGetAllPostQuery, useSubmitPostMutation } from "@/Redux/api/postApi";
 import { useAppSelector } from "@/Redux/hooks";
 import { IPost } from "@/types/newsfeed";
 
@@ -34,6 +34,8 @@ const FeedPostCard = () => {
   const [postText, setPostText] = useState("");
   const [submitPost, options] = useSubmitPostMutation();
   const theme = useAppSelector((state) => state.themeSlice.theme);
+  const { data: allPost, isLoading } = useGetAllPostQuery(null);
+  console.log(allPost);
 
   const handlePost = async () => {
     if (postText.length > 5) {
