@@ -7,7 +7,7 @@
  */
 
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import love from "/public/assets/reaction/love.png";
 import sad from "/public/assets/reaction/sad.png";
 import wow from "/public/assets/reaction/wow.png";
@@ -17,15 +17,14 @@ import like from "/public/assets/reaction/like.png";
 import Image from "next/image";
 import { useAppSelector } from "@/Redux/hooks";
 import { IReaction } from "@/types/newsfeed";
-import { useDispatch } from "react-redux";
 import { useSubmitReactionMutation } from "@/Redux/api/reactionApi";
 
 const ReactionLabel = () => {
   // redux
-  const dispatch = useDispatch();
   const [submitReaction] = useSubmitReactionMutation();
   const { post: id } = useAppSelector((state) => state.utilitySlice);
 
+  // handling submit reaction in databse
   const handleSubmitReaction = async (
     reactionType: "like" | "love" | "haha" | "sad" | "wow" | "angry"
   ) => {
