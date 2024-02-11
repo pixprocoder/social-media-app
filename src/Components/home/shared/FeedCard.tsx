@@ -58,13 +58,16 @@ const FeedCard = ({ data }: { data?: IPost }) => {
     dispatch(setPostId(data?._id as string));
   };
 
-  // let reaction: IReaction;
+  let reaction: IReaction;
   if (!isLoading && reactions && reactions.length > 0) {
     const userReaction = getUserReaction(reactions as IReaction[]);
+    reaction = userReaction;
     // console.log(userReaction);
-    dispatch(setReaction(userReaction?.reaction));
+    // dispatch(setReaction(userReaction?.reaction));
     // setReaction(userReaction?.reaction);
   }
+
+  // console.log(reaction);
 
   // extract data for use
   const fullName = FullName(data?.user?.name as IName);
@@ -191,7 +194,11 @@ const FeedCard = ({ data }: { data?: IPost }) => {
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
-                  src={defaultReaction}
+                  src={
+                    reaction?.reaction
+                      ? `/assets/reaction/${reaction?.reaction}.png`
+                      : likeOutline
+                  }
                   width={20}
                   height={20}
                   alt="like icon"

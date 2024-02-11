@@ -57,6 +57,23 @@ const FeedPostCard = () => {
     }
   };
 
+  const handlePost = async () => {
+    if (postText.length > 5) {
+      try {
+        const postData: IPost = {
+          postText: postText,
+        };
+        const response = await submitPost(postData);
+
+        // Reset the input field
+        setPostText("");
+      } catch (error) {
+        console.error("Error submitting post:", error);
+        // Handle the error as needed
+      }
+    }
+  };
+
   return (
     <div
       className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} rounded-md p-4`}
@@ -132,7 +149,7 @@ const FeedPostCard = () => {
                   </div>
                   <DialogClose asChild>
                     <button
-                      //   onClick={handlePost}
+                      onClick={handlePost}
                       disabled={postText === "" ? true : false}
                       type="submit"
                       className="px-5 text-md font-bold text-white rounded bg-violet-500 hover:bg-violet-800 transition-colors duration-300"
