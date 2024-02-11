@@ -33,6 +33,9 @@ import { MdPermMedia } from "react-icons/md";
 
 const FeedPostCard = () => {
   const [postText, setPostText] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  console.log(selectedFile);
+
   const [img, setImg] = useState("");
   const [submitPost, options] = useSubmitPostMutation();
   const theme = useAppSelector((state) => state.themeSlice.theme);
@@ -140,6 +143,7 @@ const FeedPostCard = () => {
                         type="file"
                         id="uploadImage"
                         className="hidden"
+                        onChange={(e) => setSelectedFile(e.target.files[0])}
                         // onChange={(e) => setImg(e.target.value)}
                       />
                       <MdPermMedia className="text-violet-500 text-2xl cursor-pointer" />
