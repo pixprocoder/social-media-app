@@ -20,51 +20,63 @@ import PostCardDrwopDownItem from "../Dropdowns/Items/PostCardItems";
 import PostCommentBox from "../shared/PostCommentBox";
 import img from "/public/unnamed.webp";
 import likeOutline from "/public/assets/reaction/likeOutline.png";
+import like from "/public/assets/reaction/like.png";
+import love from "/public/assets/reaction/love.png";
+import haha from "/public/assets/reaction/haha.png";
+import sad from "/public/assets/reaction/sad.png";
+import angry from "/public/assets/reaction/angry.png";
+import wow from "/public/assets/reaction/wow.png";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/Components/ui/dialog";
-import { AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+import { setReaction } from "@/Redux/Slices/reactionSlice";
+// import like
+// import { AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 
 const FeedCard = ({ data }: { data?: IPost }) => {
   const [showComments, setShowComments] = useState(false);
+  const [defaultReaction, setReactions] = useState(likeOutline);
 
   // redux
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.themeSlice.theme);
+  // const reaction = useAppSelector((state) => state.reaction.reaction);
+  // console.log(reaction)
   const { data: comments } = useGetAllCommentQuery(data?._id);
-  const { data: reactions } = useGetAllReactionQuery(data?._id);
+  const {
+    data: reactions,
+    isLoading,
+    isSuccess,
+  } = useGetAllReactionQuery(data?._id);
 
   // handle added post id  for submiting post related work
   const handleAddedPostId = () => {
     dispatch(setPostId(data?._id as string));
   };
 
-  let reaction: IReaction = {
-    reaction: "like",
-  };
-  if (reactions && reactions.length > 0) {
+  // let reaction: IReaction;
+  if (!isLoading && reactions && reactions.length > 0) {
     const userReaction = getUserReaction(reactions as IReaction[]);
-    reaction = userReaction as unknown as IReaction;
+    // console.log(userReaction);
+    dispatch(setReaction(userReaction?.reaction));
+    // setReaction(userReaction?.reaction);
   }
 
   // extract data for use
-
   const fullName = FullName(data?.user?.name as IName);
   const userProfilePicture =
     typeof data?.user === "object" && "profilePicture" in data.user
       ? data.user.profilePicture
       : "";
 
-  const reactionImg = reaction?.reaction
-    ? `${reaction?.reaction}`
-    : `${likeOutline}`;
-
-  // console.log(reactionImg);
+  // console.log(reaction?.reaction);
+  // const loginUserReaction = reaction?.reaction
+  //   ? `${reaction?.reaction}`
+  //   : `${likeOutline}`;
 
   // start: Added by samsul 10/02/2024
   // Date format
@@ -179,7 +191,7 @@ const FeedCard = ({ data }: { data?: IPost }) => {
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
-                  src={likeOutline}
+                  src={defaultReaction}
                   width={20}
                   height={20}
                   alt="like icon"

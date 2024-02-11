@@ -8,7 +8,6 @@ import { Avatar, AvatarImage } from "@/Components/ui/avatar";
 import { Button } from "@/Components/ui/button";
 import { profileMenuItems } from "@/constants/profileMenu";
 import { CiEdit } from "react-icons/ci";
-
 import Image from "next/image";
 import React, { useState } from "react";
 

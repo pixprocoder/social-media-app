@@ -6,7 +6,7 @@ export interface IInitialState {
 }
 
 const initialState: IInitialState = {
-  reaction: "",
+  reaction: "likeOutline",
 };
 
 export const reactionSlice = createSlice({
