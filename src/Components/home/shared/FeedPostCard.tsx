@@ -25,7 +25,6 @@ import { Textarea } from "@/Components/ui/textarea";
 import { useGetAllPostQuery, useSubmitPostMutation } from "@/Redux/api/postApi";
 import { useAppSelector } from "@/Redux/hooks";
 import { IPost } from "@/types/newsfeed";
-import { log } from "console";
 
 import React, { FormEvent, useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
