@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/Components/ui/select";
+import { BiXCircle } from "react-icons/bi";
 import { Textarea } from "@/Components/ui/textarea";
 import { useGetAllPostQuery, useSubmitPostMutation } from "@/Redux/api/postApi";
 import { useAppSelector } from "@/Redux/hooks";
@@ -30,11 +31,14 @@ import Image from "next/image";
 import React, { FormEvent, useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { MdPermMedia } from "react-icons/md";
+import clsx from "clsx";
 
 const FeedPostCard = () => {
-  const [postText, setPostText] = useState("");
+  const [postText, setPostText] = useState("Hello i am masum Rana");
   // const [images, setImages] = useState(null);
-  const [img, setImg] = useState(null);
+  const [imgs, setImg] = useState([]);
+  const [imgsPath, setImgsPath] = useState([]);
+  const [imgUrls, setImgUrl] = useState([]);
   const [submitPost, options] = useSubmitPostMutation();
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const { data: allPost, isLoading } = useGetAllPostQuery(null);
@@ -56,19 +60,59 @@ const FeedPostCard = () => {
 
   // handle submit image
   const handleSubmitImage = async (e: FormEvent<HTMLFormElement>) => {
-    const image = e.target.files[0];
-    const file = await imgebase64(image);
-    await setImg(file as string);
-    console.log(img);
+    const image = e.target.files && e.target.files[0];
+    setImgsPath([...imgsPath, image]);
+
+    if (image) {
+      const file = await imgebase64(image);
+      setImg([...imgs, file]);
+    }
   };
 
+  const handleRemoveImage = (index: number) => {
+    const updatedImgs = [...imgs];
+    updatedImgs.splice(index, 1);
+    setImg(updatedImgs);
+  };
+
+  const data = new FormData();
+
   const handlePost = async () => {
-    if (postText.length > 5) {
+    data.append("image", imgsPath);
+    const api_key = "e76b695c8c9d3f4bfa293469ec3905ed";
+    const image_hosting_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
+
+    // console.log(imgsPath);
+
+    imgsPath?.length > 0 &&
+      imgsPath?.map((path: string) => {
+        data.append("image", path);
+        fetch(image_hosting_url, {
+          method: "POST",
+          body: data,
+        })
+          .then((res) => res.json())
+          .then((data: any) => {
+            console.log(data.data.display_url);
+
+            // const imgUrl = data.data.url as string;
+            setImgUrl([...imgUrls, imgUrl]);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+
+    console.log(imgUrls);
+
+    if (imgsPath.length > 0 && imgUrls.length > 0) {
       try {
         const postData: IPost = {
           postText: postText,
+          Images: [...imgUrls],
         };
         const response = await submitPost(postData);
+        console.log(response);
 
         // Reset the input field
         setPostText("");
@@ -137,20 +181,33 @@ const FeedPostCard = () => {
                 placeholder="What's on your mind?"
               />
 
-              <div className="flex justify-center">
-                {img && (
-                  <Image
-                    src={img}
-                    width={300}
-                    height={200}
-                    alt="select image"
-                  />
-                )}
+              <div className="">
+                <div className="flex justify-center flex-wrap relative">
+                  {imgs.length > 0 &&
+                    imgs.map((img, index) => (
+                      <div key={index} className="relative">
+                        <Image
+                          className="w-[300px] h-[200px]"
+                          src={img}
+                          width={300}
+                          height={200}
+                          alt={`image-${index}`}
+                        />
+                        <button
+                          className="absolute top-0 "
+                          onClick={() => handleRemoveImage(index)}
+                        >
+                          <BiXCircle className="text-3xl bg-black-400   text-white " />
+                        </button>
+                      </div>
+                    ))}
+                </div>
               </div>
               <DialogFooter className="flex justify-between items-center sm:justify-between">
                 <div className="flex gap-4">
                   <label htmlFor="uploadImage">
                     <input
+                      multiple
                       name="uploadImage"
                       type="file"
                       id="uploadImage"
