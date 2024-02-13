@@ -25,6 +25,7 @@ import { Textarea } from "@/Components/ui/textarea";
 import { useGetAllPostQuery, useSubmitPostMutation } from "@/Redux/api/postApi";
 import { useAppSelector } from "@/Redux/hooks";
 import { IPost } from "@/types/newsfeed";
+import Image from "next/image";
 
 import React, { FormEvent, useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
@@ -32,31 +33,33 @@ import { MdPermMedia } from "react-icons/md";
 
 const FeedPostCard = () => {
   const [postText, setPostText] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
-  console.log(selectedFile);
-
-  const [img, setImg] = useState("");
+  // const [images, setImages] = useState(null);
+  const [img, setImg] = useState(null);
   const [submitPost, options] = useSubmitPostMutation();
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const { data: allPost, isLoading } = useGetAllPostQuery(null);
 
-  const handleSubmitPost = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(e);
+  const imgebase64 = (file: File) => {
+    const reader = new FileReader();
 
-    if (postText.length > 5) {
-      try {
-        const postData = {
-          postText: postText,
-        };
-        // const response = await submitPost(postData);
-        // Reset the input field
-        setPostText("");
-      } catch (error) {
-        console.error("Error submitting post:", error);
-        // Handle the error as needed
-      }
+    if (file instanceof Blob) {
+      reader.readAsDataURL(file);
+
+      return new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (err) => reject(err);
+      });
+    } else {
+      return Promise.reject("Invalid file type");
     }
+  };
+
+  // handle submit image
+  const handleSubmitImage = async (e: FormEvent<HTMLFormElement>) => {
+    const image = e.target.files[0];
+    const file = await imgebase64(image);
+    await setImg(file as string);
+    console.log(img);
   };
 
   const handlePost = async () => {
@@ -95,74 +98,82 @@ const FeedPostCard = () => {
               />
             </DialogTrigger>
 
-            <form onSubmit={handleSubmitPost}>
-              <DialogContent className="sm:max-w-[425px]  bg-white">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl font-bold">
-                    Create Post
-                  </DialogTitle>
-                </DialogHeader>
-                <hr />
-                <div className="flex gap-3 items-center">
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-bold text-md">Samsul kobir</p>
-                    <Select>
-                      <SelectTrigger className="w-[90px] bg-white text-black px-2">
-                        <SelectValue placeholder="Public" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-white text-black">
-                        <SelectGroup>
-                          <SelectItem value="apple">Public</SelectItem>
-                          <SelectItem value="banana">Friend</SelectItem>
-                          <SelectItem value="blueberry">Only Me</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
+            <DialogContent className="sm:max-w-[425px]  bg-white">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold">
+                  Create Post
+                </DialogTitle>
+              </DialogHeader>
+              <hr />
+              <div className="flex gap-3 items-center">
+                <Avatar className="w-8 h-8">
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-bold text-md">Samsul kobir</p>
+                  <Select>
+                    <SelectTrigger className="w-[90px] bg-white text-black px-2">
+                      <SelectValue placeholder="Public" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-black">
+                      <SelectGroup>
+                        <SelectItem value="apple">Public</SelectItem>
+                        <SelectItem value="banana">Friend</SelectItem>
+                        <SelectItem value="blueberry">Only Me</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                 </div>
-                <Textarea
-                  name="post"
-                  value={postText}
-                  className="w-full outline-none  text-xl py-4"
-                  onChange={(e) => setPostText(e.target.value)}
-                  placeholder="What's on your mind?"
-                />
-                <DialogFooter className="flex justify-between items-center sm:justify-between">
-                  <div className="flex gap-4">
-                    <label htmlFor="uploadImage">
-                      <input
-                        name="uploadImage"
-                        type="file"
-                        id="uploadImage"
-                        className="hidden"
-                        onChange={(e) => setSelectedFile(e.target.files[0])}
-                        // onChange={(e) => setImg(e.target.value)}
-                      />
-                      <MdPermMedia className="text-violet-500 text-2xl cursor-pointer" />
-                    </label>
+              </div>
+              <Textarea
+                name="post"
+                value={postText}
+                className="w-full outline-none  text-xl py-4"
+                onChange={(e) => setPostText(e.target.value)}
+                placeholder="What's on your mind?"
+              />
 
-                    <BsEmojiSmileFill className="text-violet-500 text-2xl cursor-pointer" />
-                  </div>
-                  <DialogClose asChild>
-                    <button
-                      onClick={handlePost}
-                      disabled={postText === "" ? true : false}
-                      type="submit"
-                      className="px-5 text-md font-bold text-white rounded bg-violet-500 hover:bg-violet-800 transition-colors duration-300"
-                    >
-                      Post
-                    </button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </form>
+              <div className="flex justify-center">
+                {img && (
+                  <Image
+                    src={img}
+                    width={300}
+                    height={200}
+                    alt="select image"
+                  />
+                )}
+              </div>
+              <DialogFooter className="flex justify-between items-center sm:justify-between">
+                <div className="flex gap-4">
+                  <label htmlFor="uploadImage">
+                    <input
+                      name="uploadImage"
+                      type="file"
+                      id="uploadImage"
+                      className="hidden"
+                      onChange={(e) => handleSubmitImage(e)}
+                    />
+                    <MdPermMedia className="text-violet-500 text-2xl cursor-pointer" />
+                  </label>
+
+                  <BsEmojiSmileFill className="text-violet-500 text-2xl cursor-pointer" />
+                </div>
+                <DialogClose asChild>
+                  <button
+                    onClick={handlePost}
+                    disabled={postText === "" ? true : false}
+                    type="submit"
+                    className="px-5 text-md font-bold text-white rounded bg-violet-500 hover:bg-violet-800 transition-colors duration-300"
+                  >
+                    Post
+                  </button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
           </Dialog>
         </div>
         <Button
