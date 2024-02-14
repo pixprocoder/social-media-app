@@ -13,7 +13,7 @@ const comment_replyApi = baseApi.injectEndpoints({
     }),
 
     getAllComment_replies: build.query({
-      query: (comment_id) => ({
+      query: (comment_id: string) => ({
         url: `/comment-reply/${comment_id}`,
         method: "GET",
       }),
@@ -25,5 +25,6 @@ const comment_replyApi = baseApi.injectEndpoints({
 
 export const {
   useSubmitComment_replyMutation,
-  useLazyGetAllComment_repliesQuery,
+  useGetAllComment_repliesQuery,
+  // useLazyGetAllComment_repliesQuery,
 } = comment_replyApi;

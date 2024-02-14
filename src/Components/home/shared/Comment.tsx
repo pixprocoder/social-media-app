@@ -2,47 +2,66 @@
 import React, { useState } from "react";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { IComment } from "@/types/newsfeed";
+import { IComment, IComment_reply } from "@/types/newsfeed";
 import { IName } from "@/types/auth";
 import FullName from "@/service/name.service";
 import CommentReply from "@/Components/PostCard/CommentReply";
+import CommentCard from "@/Components/CommentSection/CommentCard";
+import { useGetAllComment_repliesQuery } from "@/Redux/api/replyCommentApi";
+import CommentReplyCard from "@/Components/CommentSection/CommentReplyCard";
 
 const Comment = ({ comment }: { comment: IComment }) => {
   const [isReplyOpen, setReplyOpen] = useState(false);
+  // redux
+  const { data: AllReply } = useGetAllComment_repliesQuery(
+    comment?._id as string
+  );
+
+  // extract data
   const fullName = FullName(comment?.user?.name as IName);
   const userProfilePicture =
     typeof comment?.user === "object" && "profilePicture" in comment.user
       ? comment.user.profilePicture
       : "";
 
-  const handlePostReplyComment = () => {};
   return (
     <div className="p-2 flex gap-2   ">
-      <Avatar
-        className="border "
-        src={userProfilePicture}
-        size="large"
-        icon={<UserOutlined />}
-      />
+      <div>
+        <Avatar src={userProfilePicture} size="large" icon={<UserOutlined />} />
+      </div>
       <div>
         <div>
-          <div className="bg-gray-300 p-2 rounded-md mt-2   ">
-            <h1 className="font-bold color_dark_1">{fullName}</h1>
-            <p className="text-sm   color_dark_2">{comment?.comment}</p>
+          <CommentCard comment={comment} />
+          <div className="flex  items-center gap-5  ">
+            <button className="text-[12px]   cursor-pointer hover:underline color_dark_2">
+              Like
+            </button>
+            <button
+              onClick={() => setReplyOpen(!isReplyOpen)}
+              className="text-[12px]   hover:underline color_dark_2"
+            >
+              Reply
+            </button>
           </div>
         </div>
-        <div className="flex justify-between items-center w-[600px]">
-          <button className="text-[12px] my-1 cursor-pointer hover:underline color_dark_2">
-            Like
-          </button>
-          <button
-            onClick={() => setReplyOpen(true)}
-            className="text-[12px] my-1 cursor-pointer hover:underline color_dark_2"
-          >
-            Reply
-          </button>
+
+        <div className="lg:w-[500px] w-[300px] lg:ms-10 ms-5 mt-2">
+          {isReplyOpen && (
+            <>
+              <div>
+                {AllReply?.length > 0 &&
+                  AllReply?.map((reply: IComment_reply) => (
+                    <CommentReplyCard
+                      key={reply?._id}
+                      comment_reply={reply as IComment_reply}
+                    />
+                  ))}
+              </div>
+
+              <CommentReply comment_id={comment?._id as string} />
+            </>
+          )}
         </div>
-        {isReplyOpen && <CommentReply />}
       </div>
     </div>
   );

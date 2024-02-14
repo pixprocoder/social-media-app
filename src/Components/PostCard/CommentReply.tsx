@@ -1,15 +1,31 @@
 "use client";
-
 import { useSubmitComment_replyMutation } from "@/Redux/api/replyCommentApi";
+import { IComment_reply } from "@/types/newsfeed";
 import { FormEvent, useState } from "react";
 import { BsXCircle, BsEmojiSmile, BsCamera, BsSend } from "react-icons/bs";
-const CommentReply = () => {
+const CommentReply = ({ comment_id }: { comment_id: string }) => {
   const [isCollapse, setCollapse] = useState(false);
 
   // redux
-  const [seubmitReply] = useSubmitComment_replyMutation();
+  const [submitReply] = useSubmitComment_replyMutation();
 
-  const handlePostReplyComment = (e: FormEvent<HTMLFormElement>) => {};
+  //   handle reply comment
+  const handlePostReplyComment = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const replyInput = e.target as HTMLFormElement;
+    const reply = (
+      replyInput.querySelector('[name="commentbox"]') as HTMLInputElement
+    )?.value;
+
+    if (reply?.length > 0) {
+      const comment_reply: IComment_reply = {
+        comment: comment_id,
+        comment_reply: reply,
+      };
+      await submitReply(comment_reply);
+      replyInput.reset();
+    }
+  };
   return (
     <div className="w-full mt-4 bg-gray-200 rounded-md  transition-all duration-300 ">
       <form
