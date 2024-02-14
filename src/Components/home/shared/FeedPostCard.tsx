@@ -31,7 +31,6 @@ import Image from "next/image";
 import React, { FormEvent, useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { MdPermMedia } from "react-icons/md";
-import clsx from "clsx";
 
 const FeedPostCard = () => {
   const [postText, setPostText] = useState("Hello i am masum Rana");
@@ -103,7 +102,7 @@ const FeedPostCard = () => {
           });
       });
 
-    console.log(imgUrls);
+    // console.log(imgUrls);
 
     if (imgsPath.length > 0 && imgUrls.length > 0) {
       try {

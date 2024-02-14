@@ -23,6 +23,12 @@ export interface IComment {
   post?: string;
   comment: string;
 }
+export interface IComment_reply {
+  _id?: string;
+  user?: IUser | IUserSpecificField;
+  comment: string;
+  comment_reply: string;
+}
 
 export interface IReaction {
   _id?: string;

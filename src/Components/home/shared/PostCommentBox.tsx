@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { BsXCircle, BsEmojiSmile, BsCamera } from "react-icons/bs";
+import { BsXCircle, BsEmojiSmile, BsCamera, BsSend } from "react-icons/bs";
 import { Avatar, Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 // import EmojiPicker from "emoji-picker-react";
@@ -28,7 +28,7 @@ const PostCommentBox = ({ setShowComments, postId }: any) => {
     };
 
     const res = await submitComment(commentData);
-    console.log(res);
+    // console.log(res);
 
     form.reset();
   };
@@ -83,7 +83,7 @@ const PostCommentBox = ({ setShowComments, postId }: any) => {
                   type="submit"
                   className="px-4 py-2 rounded-lg bg-violet-500  font-semibold text-white hover:bg-violet-800"
                 >
-                  Post Comment
+                  <BsSend />
                 </button>
               </div>
             </form>
