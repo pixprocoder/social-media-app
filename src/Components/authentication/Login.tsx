@@ -10,39 +10,43 @@
 import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Checkbox, Form, Input } from "antd";
-import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
-import { changeAuthState } from "@/Redux/Slices/authSlice";
-import { useLoginMutation } from "@/Redux/api/authApi";
 import Notification from "../shared/Notification";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/Redux/hooks";
+import { useLoginMutation } from "@/Redux/api/authApi";
+import { changeAuthState } from "@/Redux/Slices/authSlice";
+import { setToLocalStorage } from "@/utils/local-storage";
+import { authKey } from "@/constants/storageKey";
 
-const Login: React.FC = () => {
+const Login = () => {
   const router = useRouter();
-  // reudx
+  // redux
   const dispatch = useAppDispatch();
-  // const [setLogin] = useLoginMutation();
+  const [setLogin] = useLoginMutation();
 
   const onFinish = async (values: any) => {
-    // const res = await setLogin(values);
-    // console.log(res);
-    // if (res?.data?.success) {
-    //   Notification({
-    //     description: "User Successfully Logged in",
-    //     placement: "bottomRight",
-    //   });
-    //   router.push("/home");
-    // } else {
-    //   Notification({
-    //     description: "Something is went wrong.",
-    //     placement: "bottomLeft",
-    //   });
-    // }
-    // console.log(values);
+    const res = await setLogin(values);
+
+    if ("data" in res && res.data?.accessToken) {
+      setToLocalStorage(authKey, res.data.accessToken);
+      router.push("/home");
+      Notification({
+        description: "User Successfully Logedin",
+        placement: "bottomRight",
+      });
+    } else {
+      Notification({
+        description: "Something is wrong",
+        placement: "bottomLeft",
+      });
+    }
   };
 
   return (
-    <div className="lg:w-[500px] border p-10 shadow-lg shadow-violet-500 rounded-lg">
-      <h2 className="text-center font-bold text-5xl mb-10 ">Login</h2>
+    <div className="lg:w-[600px]  p-10 shadow-sm bg-transparent shadow-violet-500 rounded-lg">
+      <h2 className="text-center font-bold text-5xl mb-10  text-violet-500">
+        Login
+      </h2>
       <Form
         name="normal_login"
         className="login-form"
@@ -71,30 +75,37 @@ const Login: React.FC = () => {
         </Form.Item>
         <Form.Item>
           <div className="flex justify-between">
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
+            <Form.Item
+              className="text-gray-100"
+              name="remember"
+              valuePropName="checked"
+              noStyle
+            >
+              <Checkbox>
+                <span className="text-gray-100">Remember me</span>
+              </Checkbox>
             </Form.Item>
 
-            <a className="login-form-forgot" href="">
-              Forgot password
+            <a className="login-form-forgot text-gray-100" href="">
+              Forgot password?
             </a>
           </div>
         </Form.Item>
 
         <Form.Item>
-          <button className=" w-full font-semibold text-xl bg-violet-500 hover:bg-violet-800 transition-colors duration-300 px-4 p-1 text-white rounded">
+          <button className=" w-full font-semibold text-xl bg-violet-500 hover:bg-violet-800 transition-colors duration-300 px-4 p-1 text-gray-100 rounded">
             Log in
           </button>
         </Form.Item>
       </Form>
-      <div>
-        <span className="font-semibold">
-          If you don&apos;t have an account,{"  "}
+      <div className="flex items-center">
+        <span className="font-semibold text-gray-100">
+          New to CircleUp? {"  "}
           <button
             onClick={() => dispatch(changeAuthState())}
-            className="text-blue-400 underline "
+            className="hover:text-violet-400 text-violet-400 underline text-sm ml-1"
           >
-            Register
+            Please Register
           </button>{" "}
         </span>
       </div>

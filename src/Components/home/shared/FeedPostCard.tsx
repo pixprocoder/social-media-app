@@ -1,36 +1,246 @@
-import React from "react";
-import { BsThreeDots } from "react-icons/bs";
-import { Avatar, Button, Card, Input } from "antd";
+"use client";
+// Import necessary dependencies
+import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+import { Button } from "@/Components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/Components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/Components/ui/select";
+import { BiXCircle } from "react-icons/bi";
+import { Textarea } from "@/Components/ui/textarea";
+import { useGetAllPostQuery, useSubmitPostMutation } from "@/Redux/api/postApi";
+import { useAppSelector } from "@/Redux/hooks";
+import { IPost } from "@/types/newsfeed";
+import Image from "next/image";
+
+import React, { FormEvent, useState } from "react";
+import { BsEmojiSmileFill } from "react-icons/bs";
 import { MdPermMedia } from "react-icons/md";
-import { FaSmile } from "react-icons/fa";
 
 const FeedPostCard = () => {
-  return (
-    <Card title="What's your mind!" bordered={false}>
-      <div className="flex ">
-        <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />
-        <Input placeholder="Write something" variant="borderless" />
-      </div>
-      <div className="mt-8 flex justify-between">
-        <div className="flex gap-2">
-          <p className="px-2 py-1 rounded-full cursor-pointer font-light bg-[#f4f4f4] flex gap-1 justify-center items-center">
-            <MdPermMedia className="color_primary" />
-            <span className="font_raleway">Media</span>
-          </p>
-          <p className="px-2 py-1 rounded-full cursor-pointer font-light bg-[#f4f4f4] flex gap-1 justify-center items-center">
-            <FaSmile className="color_primary" />
-            <span className="font_raleway">Activity</span>
-          </p>
+  const [postText, setPostText] = useState("Hello i am masum Rana");
+  // const [images, setImages] = useState(null);
+  const [imgs, setImg] = useState([]);
+  const [imgsPath, setImgsPath] = useState([]);
+  const [imgUrls, setImgUrl] = useState([]);
+  const [submitPost, options] = useSubmitPostMutation();
+  const theme = useAppSelector((state) => state.themeSlice.theme);
+  const { data: allPost, isLoading } = useGetAllPostQuery(null);
 
-          <p className="px-2 py-1 rounded-full cursor-pointer font-light bg-[#f4f4f4] flex gap-1 justify-center items-center">
-            <span>
-              <BsThreeDots />
-            </span>
-          </p>
+  const imgebase64 = (file: File) => {
+    const reader = new FileReader();
+
+    if (file instanceof Blob) {
+      reader.readAsDataURL(file);
+
+      return new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (err) => reject(err);
+      });
+    } else {
+      return Promise.reject("Invalid file type");
+    }
+  };
+
+  // handle submit image
+  const handleSubmitImage = async (e: FormEvent<HTMLFormElement>) => {
+    const image = e.target.files && e.target.files[0];
+    setImgsPath([...imgsPath, image]);
+
+    if (image) {
+      const file = await imgebase64(image);
+      setImg([...imgs, file]);
+    }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    const updatedImgs = [...imgs];
+    updatedImgs.splice(index, 1);
+    setImg(updatedImgs);
+  };
+
+  const data = new FormData();
+
+  const handlePost = async () => {
+    data.append("image", imgsPath);
+    const api_key = "e76b695c8c9d3f4bfa293469ec3905ed";
+    const image_hosting_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
+
+    // console.log(imgsPath);
+
+    imgsPath?.length > 0 &&
+      imgsPath?.map((path: string) => {
+        data.append("image", path);
+        fetch(image_hosting_url, {
+          method: "POST",
+          body: data,
+        })
+          .then((res) => res.json())
+          .then((data: any) => {
+            console.log(data.data.display_url);
+
+            // const imgUrl = data.data.url as string;
+            setImgUrl([...imgUrls, imgUrl]);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+
+    // console.log(imgUrls);
+
+    if (imgsPath.length > 0 && imgUrls.length > 0) {
+      try {
+        const postData: IPost = {
+          postText: postText,
+          Images: [...imgUrls],
+        };
+        const response = await submitPost(postData);
+        console.log(response);
+
+        // Reset the input field
+        setPostText("");
+      } catch (error) {
+        console.error("Error submitting post:", error);
+        // Handle the error as needed
+      }
+    }
+  };
+
+  return (
+    <div
+      className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} rounded-md p-4`}
+    >
+      <div className="flex justify-between items-center">
+        <div className="flex w-full mr-2 items-center gap-2 justify-center">
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <Dialog>
+            <DialogTrigger className="w-full outline-none rounded-md bg-white ">
+              <input
+                name="post"
+                className="w-full outline-none border rounded-xl p-2"
+                placeholder="What's on your mind?"
+              />
+            </DialogTrigger>
+
+            <DialogContent className="sm:max-w-[425px]  bg-white">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold">
+                  Create Post
+                </DialogTitle>
+              </DialogHeader>
+              <hr />
+              <div className="flex gap-3 items-center">
+                <Avatar className="w-8 h-8">
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-bold text-md">Samsul kobir</p>
+                  <Select>
+                    <SelectTrigger className="w-[90px] bg-white text-black px-2">
+                      <SelectValue placeholder="Public" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-black">
+                      <SelectGroup>
+                        <SelectItem value="apple">Public</SelectItem>
+                        <SelectItem value="banana">Friend</SelectItem>
+                        <SelectItem value="blueberry">Only Me</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <Textarea
+                name="post"
+                value={postText}
+                className="w-full outline-none  text-xl py-4"
+                onChange={(e) => setPostText(e.target.value)}
+                placeholder="What's on your mind?"
+              />
+
+              <div className="">
+                <div className="flex justify-center flex-wrap relative">
+                  {imgs.length > 0 &&
+                    imgs.map((img, index) => (
+                      <div key={index} className="relative">
+                        <Image
+                          className="w-[300px] h-[200px]"
+                          src={img}
+                          width={300}
+                          height={200}
+                          alt={`image-${index}`}
+                        />
+                        <button
+                          className="absolute top-0 "
+                          onClick={() => handleRemoveImage(index)}
+                        >
+                          <BiXCircle className="text-3xl bg-black-400   text-white " />
+                        </button>
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <DialogFooter className="flex justify-between items-center sm:justify-between">
+                <div className="flex gap-4">
+                  <label htmlFor="uploadImage">
+                    <input
+                      multiple
+                      name="uploadImage"
+                      type="file"
+                      id="uploadImage"
+                      className="hidden"
+                      onChange={(e) => handleSubmitImage(e)}
+                    />
+                    <MdPermMedia className="text-violet-500 text-2xl cursor-pointer" />
+                  </label>
+
+                  <BsEmojiSmileFill className="text-violet-500 text-2xl cursor-pointer" />
+                </div>
+                <DialogClose asChild>
+                  <button
+                    onClick={handlePost}
+                    disabled={postText === "" ? true : false}
+                    type="submit"
+                    className="px-5 text-md font-bold text-white rounded bg-violet-500 hover:bg-violet-800 transition-colors duration-300"
+                  >
+                    Post
+                  </button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
-        <Button type="primary">Post</Button>
+        <Button
+          type="submit"
+          disabled
+          className="px-5 text-md py-2 font-bold text-white rounded bg-violet-500 hover:bg-violet-800 transition-colors duration-300"
+        >
+          Post
+        </Button>
       </div>
-    </Card>
+    </div>
   );
 };
 

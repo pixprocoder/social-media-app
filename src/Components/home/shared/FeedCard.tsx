@@ -1,76 +1,257 @@
-import { Avatar, Button } from "antd";
+"use client";
+import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
+import { setPostId } from "@/Redux/Slices/unitlitySlice";
+import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
+import { useGetAllReactionQuery } from "@/Redux/api/reactionApi";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import FullName from "@/service/name.service";
+import { IName } from "@/types/auth";
+import { IPost, IReaction } from "@/types/newsfeed";
+import { getUserReaction } from "@/utils/getUserSpecificReaction";
 import { UserOutlined } from "@ant-design/icons";
-import React from "react";
+import { Avatar, Button, Dropdown } from "antd";
 import Image from "next/image";
-import { BiSolidLike } from "react-icons/bi";
-import { FaComment } from "react-icons/fa";
-import { IoSend } from "react-icons/io5";
-import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import Link from "next/link";
+import { useState } from "react";
+import { BsThreeDots } from "react-icons/bs";
+import { FaRegComment } from "react-icons/fa";
+import { TbShare3 } from "react-icons/tb";
+import PostCardDrwopDownItem from "../Dropdowns/Items/PostCardItems";
+import PostCommentBox from "../shared/PostCommentBox";
+import img from "/public/unnamed.webp";
+import likeOutline from "/public/assets/reaction/likeOutline.png";
+import like from "/public/assets/reaction/like.png";
+import love from "/public/assets/reaction/love.png";
+import haha from "/public/assets/reaction/haha.png";
+import sad from "/public/assets/reaction/sad.png";
+import angry from "/public/assets/reaction/angry.png";
+import wow from "/public/assets/reaction/wow.png";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/Components/ui/dialog";
+import { setReaction } from "@/Redux/Slices/reactionSlice";
+// import like
+// import { AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 
-const FeedCard = () => {
+const FeedCard = ({ data }: { data?: IPost }) => {
+  const [showComments, setShowComments] = useState(false);
+  const [defaultReaction, setReactions] = useState(likeOutline);
+
+  // redux
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector((state) => state.themeSlice.theme);
+  // const reaction = useAppSelector((state) => state.reaction.reaction);
+  // console.log(reaction)
+  const { data: comments } = useGetAllCommentQuery(data?._id);
+  const {
+    data: reactions,
+    isLoading,
+    isSuccess,
+  } = useGetAllReactionQuery(data?._id);
+
+  // handle added post id  for submiting post related work
+  const handleAddedPostId = () => {
+    dispatch(setPostId(data?._id as string));
+  };
+
+  let reaction: IReaction;
+  if (!isLoading && reactions && reactions.length > 0) {
+    const userReaction = getUserReaction(reactions as IReaction[]);
+    reaction = userReaction;
+    // console.log(userReaction);
+    // dispatch(setReaction(userReaction?.reaction));
+    // setReaction(userReaction?.reaction);
+  }
+
+  // console.log(reaction);
+
+  // extract data for use
+  const fullName = FullName(data?.user?.name as IName);
+  const userProfilePicture =
+    typeof data?.user === "object" && "profilePicture" in data.user
+      ? data.user.profilePicture
+      : "";
+
+  // console.log(reaction?.reaction);
+  // const loginUserReaction = reaction?.reaction
+  //   ? `${reaction?.reaction}`
+  //   : `${likeOutline}`;
+
+  // start: Added by samsul 10/02/2024
+  // Date format
+  const formatDate = (createdAt: any) => {
+    const date = new Date(createdAt);
+    const monthAbbreviation = date.toLocaleString("default", {
+      month: "short",
+    });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    let hour = date.getHours();
+    const minute = date.getMinutes();
+    const ampm = hour >= 12 ? "PM" : "AM";
+
+    hour = hour % 12;
+    hour = hour ? hour : 12;
+    return `${monthAbbreviation} ${day}, ${year}, ${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+  };
+  // end: Added by samsul 10/02/2024
+
   return (
-    <section>
-      <div className="flex justify-between mt-2">
+    <section
+      className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+    >
+      <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
-          <Avatar
-            className="border "
-            size="large"
-            src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-            icon={<UserOutlined />}
-          />
-          <div className="flex flex-col">
-            <span className="user_heading">John Smith</span>
-            <small className="user_sub_heading font-light">
-              July 26 2018, 01:03pm
+          <Link href={`/profile/${fullName}`}>
+            <Avatar
+              src={userProfilePicture}
+              className=" cursor-pointer "
+              size="large"
+              icon={<UserOutlined />}
+            />
+          </Link>
+          <div className={`flex flex-col`}>
+            <Link
+              href={`/profile/${data?.user?.userId}`}
+              className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline`}
+            >
+              {fullName}
+            </Link>
+            <small
+              className={`${theme === "light" ? "text-white" : " text-gray-900"}  user_sub_heading font-light`}
+            >
+              {formatDate(data?.createdAt)}
             </small>
           </div>
         </div>
-        <Button
-          shape="circle"
-          className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
-        >
-          <span>
-            <BsThreeDots className="font-bold" />
-          </span>
-        </Button>
+
+        {/* three dots  */}
+        <div>
+          <Dropdown
+            menu={{ items: PostCardDrwopDownItem }}
+            placement="bottomRight"
+            arrow
+          >
+            <Button
+              shape="circle"
+              className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+            >
+              <span>
+                <BsThreeDots className="font-bold" />
+              </span>
+            </Button>
+          </Dropdown>
+        </div>
       </div>
+
       {/* Image and text */}
       <div>
-        <p className="font-light text-sm my-2">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic sed,
-          sequi id Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Beatae expedita quibusdam ut dolores? Nobis, magni nulla asperiores
-          illo voluptas enim inventore recusandae laudantium, tenetur eligendi
-          obcaecati itaque delectus vel provident. dicta est officiis,
-          cupiditate debitis beatae non
-        </p>
-      </div>
-      <Link href={`/photo/id`}>
-        <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
-          <img
-            alt="example"
-            src="https://scontent.fotp3-1.fna.fbcdn.net/v/t39.30808-6/422390498_877546237707359_1733397625107647164_n.jpg?stp=dst-jpg_p526x296&_nc_cat=1&ccb=1-7&_nc_sid=3635dc&_nc_ohc=g3d3qhUL6UEAX-4_dQ0&_nc_ht=scontent.fotp3-1.fna&oh=00_AfCYTrYGyk89oy8m1rgSeEmRjLn4UhCAmZ0QlNQT2CmhOg&oe=65BFB15D"
-          />
+        <div>
+          <p
+            className={`${theme === "light" ? "text-white" : " text-gray-900"}   my-2`}
+          >
+            {data?.postText}
+          </p>
         </div>
-      </Link>
+        <Link href={`/photo/${data?.user?.userId}`}>
+          <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
+            <Image src={img} width={300} height={300} alt="user post img" />
+          </div>
+        </Link>
+      </div>
+
       {/* Footer */}
       <div className="flex justify-between gap-2 py-2">
-        <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
-          {" "}
-          <BiSolidLike />
-          <span className="font_raleway">Like</span>
+        <div className="flex flex-col w-full mt-2 justify-between">
+          {/* Reaction Detail modal */}
+          <Dialog>
+            <DialogTrigger className="flex">
+              <small
+                className={`${theme === "light" ? "text-white" : " text-gray-900"} text-start  mb-2 hover:underline`}
+              >
+                4 Likes
+              </small>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]  bg-white">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold">
+                  Reactions
+                </DialogTitle>
+              </DialogHeader>
+              <hr />
+            </DialogContent>
+          </Dialog>
+
+          <hr />
+          <div
+            className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 "
+            onMouseEnter={handleAddedPostId}
+          >
+            <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
+              <div className="flex gap-2">
+                <Image
+                  src={
+                    reaction?.reaction
+                      ? `/assets/reaction/${reaction?.reaction}.png`
+                      : likeOutline
+                  }
+                  width={20}
+                  height={20}
+                  alt="like icon"
+                  className=" transion-all duration-300"
+                />
+                <h2>{"like"} </h2>
+              </div>
+            </Dropdown>
+          </div>
         </div>
-        <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
-          {" "}
-          <FaComment />
-          <span className="font_raleway">Comment</span>
+        <div className="flex flex-col w-full mt-2 justify-between">
+          <div
+            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-center text-sm  mb-2`}
+          >
+            {comments?.length} {comments?.length <= 1 ? "comment" : "comments"}
+          </div>
+          <hr />
+          <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
+            <button
+              onClick={() => setShowComments(true)}
+              className="flex items-center gap-2"
+            >
+              {" "}
+              <FaRegComment className="text-xl" />
+              <span className="font-raleway">Comment</span>
+            </button>
+          </div>
         </div>
-        <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
-          {" "}
-          <IoSend />
-          <span className="font_raleway">Share</span>
+        <div className="flex flex-col w-full mt-2 justify-between">
+          <small
+            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-end  mb-2`}
+          >
+            0 share
+          </small>
+          <hr />
+          <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
+            {" "}
+            <TbShare3 className="text-xl" />
+            <span className="font_raleway">Share</span>
+          </div>
         </div>
+      </div>
+
+      {/* comment section */}
+      <div>
+        {showComments && (
+          <div>
+            <PostCommentBox
+              setShowComments={setShowComments}
+              postId={data?._id}
+            />
+          </div>
+        )}
       </div>
     </section>
   );

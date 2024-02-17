@@ -1,26 +1,45 @@
-import { Avatar, Button, Modal, Upload } from "antd";
+"use client";
+import { Avatar, Button, Divider, Dropdown, Modal, Upload } from "antd";
 import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { UserOutlined } from "@ant-design/icons";
-import { MdOutlinePeopleAlt } from "react-icons/md";
-import { FaGift, FaPlus } from "react-icons/fa6";
+import { MdOutlineHideSource, MdOutlinePeopleAlt } from "react-icons/md";
+import { FaGift, FaPlus, FaRegBookmark } from "react-icons/fa6";
+import { useAppSelector } from "@/Redux/hooks";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import StoriesCardDrwopDownItem from "./Dropdowns/Items/StoriesItems";
+import SuggestedFriendsItems from "./Dropdowns/Items/SuggestedFriendsItems";
 
 const RightSideBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const theme = useAppSelector((state) => state.themeSlice.theme);
   return (
     <section>
-      <div className="flex flex-col justify-between min-h-[90vh] sticky left-0 top-0 ">
-        <div className="bg-white p-4 rounded-md">
+      <div className="flex flex-col gap-4  ">
+        <div
+          className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+        >
           <div>
             <div className="flex justify-between  items-center">
-              <h1 className="font_montserrat">Stories</h1>
-              <Button
-                shape="circle"
-                className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+              <h1
+                className={`${theme === "light" ? "text-white" : " color_dark_1"} font_montserrat `}
               >
-                <span>
-                  <BsThreeDotsVertical className="font-bold" />
-                </span>
-              </Button>
+                Stories
+              </h1>
+              <div>
+                <Dropdown menu={{ items: StoriesCardDrwopDownItem }}>
+                  <Button
+                    onClick={() => setIsOpen2(!isOpen2)}
+                    shape="circle"
+                    className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+                  >
+                    <span>
+                      <BsThreeDotsVertical className="font-bold" />
+                    </span>
+                  </Button>
+                </Dropdown>
+              </div>
             </div>
             <hr className="mt-2" />
             {/* pages 1 */}
@@ -90,18 +109,29 @@ const RightSideBar = () => {
         </div>
 
         {/* Suggested friend */}
-        <div className="bg-white p-4 rounded-md">
+        <div
+          className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+        >
           <div>
             <div className="flex justify-between items-center ">
-              <h1 className="font_montserrat">Suggested Friends</h1>
-              <Button
-                shape="circle"
-                className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+              <h1
+                className={`${theme === "light" ? "text-white" : " color_dark_1"}  font_montserrat `}
               >
-                <span>
-                  <BsThreeDotsVertical className="font-bold" />
-                </span>
-              </Button>
+                Suggested Friends
+              </h1>
+
+              <div>
+                <Dropdown menu={{ items: SuggestedFriendsItems }}>
+                  <Button
+                    shape="circle"
+                    className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+                  >
+                    <span>
+                      <BsThreeDotsVertical className="font-bold" />
+                    </span>
+                  </Button>
+                </Dropdown>
+              </div>
             </div>
             <hr className="mt-2" />
             {/* pages 1 */}
@@ -161,7 +191,7 @@ const RightSideBar = () => {
         </div>
 
         {/* Event */}
-        <div className="bg-blue-500 bg-opacity-15 p-4 rounded-md">
+        {/* <div className="bg-blue-500 bg-opacity-15 p-4 rounded-md">
           <div className="flex justify-between items-center">
             <h1 className="font_montserrat">
               <FaGift />
@@ -185,7 +215,7 @@ const RightSideBar = () => {
             </h1>
             <Button>Write Message</Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
