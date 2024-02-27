@@ -2,7 +2,7 @@
 
 ## Overview
 
-Social-Media.In this app have become an integral part of daily life, offering users diverse features to share, interact, and engage with content.
+Social-Media.In this app have become an integral part of daily life, offering users diverse features to share, interact, and engage with content. and more features will be added 
 
 ## Social Media Application - Key Features
 
